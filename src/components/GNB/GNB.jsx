@@ -8,13 +8,13 @@ const GNB = () => {
   const isCreateBtn = ['/study', '/study/create'].includes(location.pathname);
 
   return (
-    <header className="gnbWrapper">
-      <nav className="gnbContainer">
+    <header className="gnb-wrapper">
+      <nav className="gnb-container">
         <Link to="/study">
           <img src={logo} alt="공부의 숲" className="logo" />
         </Link>
         {isCreateBtn && (
-          <Link to="/study/create" className="btn createBtn">
+          <Link to="/study/create" className="btn create-btn">
             스터디 만들기
           </Link>
         )}
