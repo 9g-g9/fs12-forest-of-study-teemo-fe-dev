@@ -11,6 +11,10 @@
   width: 648px;
   padding: 40px 24px;
   border-radius: 20px;
-  background-color: #ffffff;
+  background-color: var(--white_FFFFFF);
   box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
