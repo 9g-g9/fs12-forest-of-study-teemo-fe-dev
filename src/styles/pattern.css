@@ -53,3 +53,42 @@
 .btn.error {
   background-color: var(--error_C41013);
 }
+
+/* layout */
+.layout {
+  background: var(--bg_F6F4EF);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* wrapper */
+.wrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px;
+  flex-direction: column;
+  border-radius: 20px;
+  background: var(--white_FFFFFF);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 24px;
+  }
+  .layout {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 16px;
+  }
+  .layout {
+    padding: 16px;
+  }
+}

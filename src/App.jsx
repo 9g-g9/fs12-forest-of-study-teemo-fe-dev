@@ -1,21 +1,19 @@
-import { Route, Routes } from 'react-router-dom';
+import React from 'react';
 import './App.css';
 import './styles/pattern.css';
 import './styles/reset.css';
 import Header from './components/Header/Header';
 import Button from './components/Button/Button';
 
-function App() {
+const App = () => {
   return (
-    <div>
+    <>
       <Header />
-      <Button
-        btnTxt={'버튼'}
-        btnStyle={['btnDefault']}
-        btnType={'button'}
-      ></Button>
-    </div>
+      <div className="layout">
+        <div className="wrapper">{/* 여기에 각 페이지 내용 작성 */}</div>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
