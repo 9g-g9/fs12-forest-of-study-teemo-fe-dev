@@ -9,8 +9,12 @@ const PasswordInput = ({ password, setPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const validatePassword = (value) => {
-    if (!value) return '필수 입력사항입니다.';
-    if (value.length < 8) return '비밀번호는 8자 이상이어야 합니다.';
+    if (!value) {
+      return '필수 입력사항입니다.';
+    }
+    if (value.length < 8) {
+      return '비밀번호는 8자 이상이어야 합니다.';
+    }
     return '';
   };
 

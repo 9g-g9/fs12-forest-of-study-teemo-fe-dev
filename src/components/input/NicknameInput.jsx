@@ -6,8 +6,12 @@ const NicknameInput = ({ nickname, setNickname }) => {
   const [newnickname, setNewNickname] = useState(false);
 
   const validateNickname = (value) => {
-    if (!value) return '필수 입력사항입니다.';
-    if (value.length < 2) return '닉네임은 2자 이상이어야 합니다.';
+    if (!value) {
+      return '필수 입력사항입니다.';
+    }
+    if (value.length < 2) {
+      return '닉네임은 2자 이상이어야 합니다.';
+    }
     return '';
   };
 
