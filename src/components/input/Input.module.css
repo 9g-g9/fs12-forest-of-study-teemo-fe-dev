@@ -9,15 +9,6 @@
   position: relative;
 }
 
-.input:hover {
-  background-color: var(--white_ffffff);
-}
-
-.input:focus {
-  border-color: gray;
-  outline: none;
-}
-
 .errorMessage {
   color: var(--error_C41013);
   font-size: 14px;
@@ -27,9 +18,7 @@
 }
 
 .inputContainer {
-  border-color: var(--gray_DDDDDD);
   margin-bottom: 50px;
-  position: relative;
   width: 648px;
 }
 
