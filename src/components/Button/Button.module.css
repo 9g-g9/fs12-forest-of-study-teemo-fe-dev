@@ -1,3 +1,4 @@
+.btnConfirm,
 .btnDefault {
   width: 680px;
   padding: 10px;
@@ -7,6 +8,7 @@
   border: none;
 }
 
+.btnModification,
 .btnCancel {
   width: 278px;
   padding: 10px;
@@ -21,12 +23,17 @@
 }
 
 @media (max-width: 1024px) {
+  .btnConfirm {
+    width: 302px;
+  }
 }
 
 @media (max-width: 768px) {
   .btnDefault {
-    width: 302x;
+    width: 302px;
   }
+  .btnModification,
+  .btnConfirm,
   .btnCancel {
     width: 130px;
   }

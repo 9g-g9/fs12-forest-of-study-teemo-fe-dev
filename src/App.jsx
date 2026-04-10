@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Button
         btnTxt={'버튼'}
-        btnStyle={'btnDefault'}
+        btnStyle={['btnDefault']}
         btnType={'button'}
       ></Button>
     </div>
