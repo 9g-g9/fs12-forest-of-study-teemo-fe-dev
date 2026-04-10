@@ -3,14 +3,14 @@
   box-sizing: border-box;
   height: 48px;
   border-radius: 15px;
-  border: 1px solid gray;
+  border: 1px solid var(--gray_DDDDDD);
   transition: none;
   outline: none;
   position: relative;
 }
 
 .input:hover {
-  background-color: white;
+  background-color: var(--white_ffffff);
 }
 
 .input:focus {
@@ -19,7 +19,7 @@
 }
 
 .error-message {
-  color: red;
+  color: var(--error_C41013);
   font-size: 14px;
   min-height: 20px;
   margin-top: 4px;
@@ -27,14 +27,14 @@
 }
 
 .input-container {
-  border-color: gray;
+  border-color: var(--gray_DDDDDD);
   margin-bottom: 50px;
   position: relative;
   width: 648px;
 }
 
 .input-error {
-  border: 1px solid red;
+  border: 1px solid var(--error_C41013);
   width: 648px;
   height: 48px;
   border-radius: 15px;
@@ -42,11 +42,11 @@
 }
 
 .input-error:hover {
-  border-color: red;
+  border-color: var(--error_C41013);
 }
 
 .input-error:focus {
-  border-color: red;
+  border-color: var(--error_C41013);
   outline: none;
 }
 
