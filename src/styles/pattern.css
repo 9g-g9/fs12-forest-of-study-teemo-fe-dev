@@ -35,19 +35,21 @@
   justify-content: center;
   align-items: center;
   background-color: var(--brand_99C08E);
-  color: var(--white);
+  color: var(--white_FFFFFF);
   cursor: pointer;
+  font-family: 'JejuStoneWall';
   font-size: 18px;
+  font-weight: 400;
 }
 
 .btn:hover {
-  background-color: var(--green-text_578246);
+  background-color: var(--green_text_578246);
 }
 
 .btn:active {
-  background-color: var(--green-text_578246);
+  background-color: var(--green_text_578246);
 }
 
 .btn.error {
-  background-color: var(--error-text_578246);
+  background-color: var(--error_C41013);
 }
