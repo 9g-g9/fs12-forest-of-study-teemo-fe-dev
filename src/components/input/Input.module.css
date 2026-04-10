@@ -1,0 +1,60 @@
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  border-radius: 15px;
+  border: 1px solid var(--gray_DDDDDD);
+  transition: none;
+  outline: none;
+  position: relative;
+}
+
+.errorMessage {
+  color: var(--error_C41013);
+  font-size: 14px;
+  min-height: 20px;
+  margin-top: 4px;
+  display: block;
+}
+
+.inputContainer {
+  margin-bottom: 50px;
+  width: 648px;
+}
+
+.inputError {
+  border: 1px solid var(--error_C41013);
+  width: 648px;
+  height: 48px;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.inputError:hover {
+  border-color: var(--error_C41013);
+}
+
+.inputError:focus {
+  border-color: var(--error_C41013);
+  outline: none;
+}
+
+.passwordContainer input {
+  position: relative;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.togglePassword {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+}
+
+.input,
+.inputError {
+  padding-left: 20px;
+}
