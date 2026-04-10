@@ -1,4 +1,4 @@
-.header-wrapper {
+.headerWrapper {
   display: flex;
   background-color: var(--bg_F6F4EF);
   justify-content: center;
@@ -8,7 +8,7 @@
   z-index: 100;
 }
 
-.gnb-container {
+.gnbContainer {
   display: flex;
   max-width: 1480px;
   width: 100%;
@@ -23,25 +23,25 @@
   height: 60px;
 }
 
-.create-btn {
+.createBtn {
   width: 252px;
   height: 58px;
   border-radius: 16px;
 }
 
 @media (max-width: 1024px) {
-  .gnb-container {
+  .gnbContainer {
     margin: 0 24px;
   }
 
-  .create-btn {
+  .createBtn {
     width: 160px;
     border-radius: 14px;
   }
 }
 
 @media (max-width: 768px) {
-  .gnb-container {
+  .gnbContainer {
     margin: 0 16px;
     padding: 32px 0;
   }
@@ -51,7 +51,7 @@
     height: 35px;
   }
 
-  .create-btn {
+  .createBtn {
     width: 106px;
     height: 38px;
     border-radius: 8px;
