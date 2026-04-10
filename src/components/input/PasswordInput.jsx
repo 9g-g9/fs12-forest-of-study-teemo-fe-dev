@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Input.css';
+import styles from './Input.module.css';
 import closeeye from '../../assets/icons/ic_close_eye.png';
 import openeye from '../../assets/icons/ic_eye.png';
 
@@ -15,10 +15,10 @@ const PasswordInput = ({ password, setPassword }) => {
   };
 
   return (
-    <div className="input-container password-container">
-      <div className="input-wrapper">
+    <div className={`${styles.inputContainer} ${styles.passwordContainer}`}>
+      <div className={styles.inputWrapper}>
         <input
-          className={newpassword && error ? 'input-error' : 'input'}
+          className={newpassword && error ? styles.inputError : styles.input}
           type={showPassword ? 'text' : 'password'}
           placeholder="비밀번호를 입력해 주세요"
           value={password}
@@ -33,11 +33,13 @@ const PasswordInput = ({ password, setPassword }) => {
         <img
           src={showPassword ? openeye : closeeye}
           alt="toggle password"
-          className="toggle-password"
+          className={styles.togglePassword}
           onClick={() => setShowPassword(!showPassword)}
         />
       </div>
-      {newpassword && error && <span className="error-message">{error}</span>}
+      {newpassword && error && (
+        <span className={styles.errorMessage}>{error}</span>
+      )}
     </div>
   );
 };

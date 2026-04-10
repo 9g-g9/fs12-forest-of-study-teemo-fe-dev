@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Input.css';
+import styles from './Input.module.css';
 
 const NicknameInput = ({ nickname, setNickname }) => {
   const [error, setError] = useState('');
@@ -12,9 +12,9 @@ const NicknameInput = ({ nickname, setNickname }) => {
   };
 
   return (
-    <div className="input-container">
+    <div className={styles.inputContainer}>
       <input
-        className={newnickname && error ? 'input-error' : 'input'}
+        className={newnickname && error ? styles.inputError : styles.input}
         type="text"
         placeholder="닉네임을 입력해 주세요"
         value={nickname}
@@ -25,7 +25,9 @@ const NicknameInput = ({ nickname, setNickname }) => {
         }}
         onBlur={() => setNewNickname(true)}
       />
-      {newnickname && error && <span className="error-message">{error}</span>}
+      {newnickname && error && (
+        <span className={styles.errorMessage}>{error}</span>
+      )}
     </div>
   );
 };

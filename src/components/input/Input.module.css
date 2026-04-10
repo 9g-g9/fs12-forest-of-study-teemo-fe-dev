@@ -18,7 +18,7 @@
   outline: none;
 }
 
-.error-message {
+.errorMessage {
   color: var(--error_C41013);
   font-size: 14px;
   min-height: 20px;
@@ -26,14 +26,14 @@
   display: block;
 }
 
-.input-container {
+.inputContainer {
   border-color: var(--gray_DDDDDD);
   margin-bottom: 50px;
   position: relative;
   width: 648px;
 }
 
-.input-error {
+.inputError {
   border: 1px solid var(--error_C41013);
   width: 648px;
   height: 48px;
@@ -41,24 +41,24 @@
   box-sizing: border-box;
 }
 
-.input-error:hover {
+.inputError:hover {
   border-color: var(--error_C41013);
 }
 
-.input-error:focus {
+.inputError:focus {
   border-color: var(--error_C41013);
   outline: none;
 }
 
-.password-container input {
+.passwordContainer input {
   position: relative;
 }
 
-.input-wrapper {
+.inputWrapper {
   position: relative;
 }
 
-.toggle-password {
+.togglePassword {
   position: absolute;
   top: 50%;
   right: 16px;
@@ -66,6 +66,6 @@
 }
 
 .input,
-.input-error {
+.inputError {
   padding-left: 20px;
 }
