@@ -18,6 +18,14 @@
   justify-content: space-between;
 }
 
+/* 페이지 내용 최대 width와 동기화 */
+@media (max-width: 1640px) {
+  .gnbContainer {
+    max-width: 1200px;
+    margin: 0 24px;
+  }
+}
+
 .logo {
   width: 182px;
   height: 60px;
@@ -29,17 +37,15 @@
   border-radius: 16px;
 }
 
+/* 태블릿 */
 @media (max-width: 1024px) {
-  .gnbContainer {
-    margin: 0 24px;
-  }
-
   .createBtn {
     width: 160px;
     border-radius: 14px;
   }
 }
 
+/* 모바일 */
 @media (max-width: 768px) {
   .gnbContainer {
     margin: 0 16px;
