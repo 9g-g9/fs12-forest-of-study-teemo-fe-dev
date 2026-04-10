@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import GNB from './components/GNB/GNB';
+import Header from './components/Header/Header';
 
 function App() {
   return (
     <div>
-      <GNB />
+      <Header />
     </div>
   );
 }

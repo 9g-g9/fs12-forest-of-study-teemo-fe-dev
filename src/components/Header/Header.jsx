@@ -1,14 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/img_logo.png';
-import './GNB.css';
+import './Header.css';
 
-const GNB = () => {
+const Header = () => {
   const location = useLocation();
 
   const isCreateBtn = ['/study', '/study/create'].includes(location.pathname);
 
   return (
-    <header className="gnb-wrapper">
+    <header className="header-wrapper">
       <nav className="gnb-container">
         <Link to="/study">
           <img src={logo} alt="공부의 숲" className="logo" />
@@ -23,4 +23,4 @@ const GNB = () => {
   );
 };
 
-export default GNB;
+export default Header;
