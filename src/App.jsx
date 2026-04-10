@@ -6,9 +6,12 @@ import Header from './components/Header/Header';
 
 const App = () => {
   return (
-    <div>
+    <>
       <Header />
-    </div>
+      <div className="layout">
+        <div className="wrapper">{/* 여기에 각 페이지 내용 작성 */}</div>
+      </div>
+    </>
   );
 };
 
