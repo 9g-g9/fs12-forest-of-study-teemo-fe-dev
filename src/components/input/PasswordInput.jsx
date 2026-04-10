@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import '../../styles/reset.css';
-import '../../styles/pattern.css';
 import './Input.css';
 import closeeye from '../../assets/icons/ic_close_eye.png';
 import openeye from '../../assets/icons/ic_eye.png';

@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import '../../styles/reset.css';
-import '../../styles/pattern.css';
 import './Input.css';
 
 const NicknameInput = ({ nickname, setNickname }) => {
