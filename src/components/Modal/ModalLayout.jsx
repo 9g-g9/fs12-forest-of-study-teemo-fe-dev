@@ -1,4 +1,4 @@
-import styles from './Modal.module.css';
+import styles from './ModalLayout.module.css';
 
 const Modal = ({ title, children }) => {
   return (
@@ -7,7 +7,6 @@ const Modal = ({ title, children }) => {
         <div className={styles.container}>
           <div className={styles.header}>{title}</div>
           <div className={styles.body}>{children}</div>
-          <div className={styles.footer}></div>
         </div>
       </div>
     </>
