@@ -12,7 +12,6 @@
 
 .top {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
@@ -24,7 +23,6 @@
 
 .navContainer {
   display: flex;
-  flex-direction: row;
   gap: 16px;
 }
 
