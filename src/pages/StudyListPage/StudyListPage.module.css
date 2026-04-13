@@ -72,7 +72,7 @@
 
   .sectionTitle {
     font-size: 24px;
-    color: #414141;
+    color: var(--black_414141);
     font-style: normal;
     font-weight: 800;
     line-height: normal;

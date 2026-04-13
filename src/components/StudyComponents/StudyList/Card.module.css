@@ -1,10 +1,16 @@
+:root {
+  --card_black_opacity_10: rgba(0, 0, 0, 0.1);
+  --card_black_opacity_40: rgba(0, 0, 0, 0.4);
+  --card_black_opacity_50: rgba(0, 0, 0, 0.5);
+}
+
 .cardBackground {
   display: flex;
   width: 100%;
   min-height: 243px;
   border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: var(--green-green_E1EDDE, #e1edde);
+  border: 1px solid var(--card_black_opacity_10);
+  background: var(--green_E1EDDE);
 }
 
 .cardInner {
@@ -28,7 +34,7 @@
 }
 
 .cardTitle {
-  color: #fff;
+  color: var(--white_FFFFFF);
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -43,14 +49,14 @@
   align-items: center;
   gap: 4px;
   padding: 0 8px;
-  color: #fff;
+  color: var(--white_FFFFFF);
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--card_black_opacity_10);
+  background: var(--card_black_opacity_50);
 }
 
 .pointIcon {
@@ -59,19 +65,17 @@
 }
 
 .cardProgressText {
-  color: #eee;
+  color: var(--gray_EEEEEE);
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
   margin-bottom: 30px;
 }
 
 .cardDescription {
-  color: #fff;
+  color: var(--white_FFFFFF);
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
   line-height: 24px; /* 150% */
   margin-bottom: 54px;
 }
@@ -87,8 +91,8 @@
   align-items: center;
   gap: 5px;
   border-radius: 50px;
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background: var(--card_black_opacity_40);
+  color: var(--white_FFFFFF);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
