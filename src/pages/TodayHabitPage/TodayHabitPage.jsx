@@ -16,9 +16,9 @@ const TodayHabitPage = () => {
             <div className={styles.top}>
               <h1 className={styles.title}>스터디명</h1>
               <nav className={styles.navContainer}>
-                <LinkButton text="오늘의 집중" url=":id/timer" />
-                <LinkButton text="로그" url=":id/logs" />
-                <LinkButton text="홈" url=":id/detail" />
+                <LinkButton text="오늘의 집중" url="/:id/focus" />
+                <LinkButton text="로그" url="/:id/logs" />
+                <LinkButton text="홈" url="/:id/detail" />
               </nav>
             </div>
             <div className={styles.time}>
