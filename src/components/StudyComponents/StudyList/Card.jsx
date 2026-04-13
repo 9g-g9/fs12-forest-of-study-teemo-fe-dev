@@ -1,4 +1,5 @@
 import styles from './Card.module.css';
+import leafIcon from '../../../assets/icons/ic_leaf.svg';
 
 const Card = ({ study }) => {
   return (
@@ -8,9 +9,12 @@ const Card = ({ study }) => {
         <div className={styles.titleDate}>
           <div className={styles.cardHeader}>
             <h3 className={styles.cardTitle}>
-              {study.nickname}의{study.title}
+              {study.nickname} 의 {study.title}
             </h3>
-            <p className={styles.cardPoint}>{study.rewardPoint}P 획득</p>
+            <p className={styles.cardPoint}>
+              <img src={leafIcon} alt="" className={styles.pointIcon} />
+              {study.rewardPoint}P 획득
+            </p>
           </div>
 
           <p className={styles.cardProgressText}>{study.progressText}</p>
@@ -19,7 +23,7 @@ const Card = ({ study }) => {
 
         {/* 이모지 */}
         <div className={styles.cardEmojiTagDiv}>
-          <span className={styles.cardEmojiTag}>💬 {study.commentCount}</span>
+          <span className={styles.cardEmojiTag}> 💬 {study.commentCount}</span>
           <span className={styles.cardEmojiTag}> 🔥 {study.fireCount}</span>
           <span className={styles.cardEmojiTag}> 🤍 {study.heartCount}</span>
         </div>
