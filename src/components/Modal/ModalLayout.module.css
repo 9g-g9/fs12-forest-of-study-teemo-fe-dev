@@ -9,7 +9,6 @@
 }
 
 .container {
-  width: 648px;
   padding: 40px 24px;
   border-radius: 20px;
   background-color: var(--white_FFFFFF);
@@ -21,7 +20,6 @@
 
 @media (max-width: 768px) {
   .container {
-    width: 344px;
     padding: 16px 16px 24px 16px;
     border-radius: 20px;
   }
