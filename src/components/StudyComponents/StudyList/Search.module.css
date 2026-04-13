@@ -28,9 +28,16 @@
   line-height: normal;
 }
 
+@media (max-width: 1024px) {
+  .searchField {
+    max-width: 214px;
+  }
+}
+
 @media (max-width: 768px) {
   .searchField {
     width: 100%;
+    max-width: none;
     height: 42px;
     gap: 10px;
     padding: 0 20px;

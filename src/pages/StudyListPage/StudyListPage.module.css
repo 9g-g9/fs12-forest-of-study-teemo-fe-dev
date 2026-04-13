@@ -50,7 +50,15 @@
   margin-top: 20px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
+  .sectionTitle {
+    font-size: 28px;
+  }
+
+  .controlsRow > :first-child {
+    max-width: 214px;
+  }
+
   .recentGrid,
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -27,6 +27,16 @@
   pointer-events: none;
 }
 
+@media (max-width: 1024px) {
+  .selectWrapper {
+    width: 126px;
+  }
+
+  .select {
+    width: 126px;
+  }
+}
+
 @media (max-width: 768px) {
   .selectWrapper {
     width: 174px;
