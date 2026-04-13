@@ -138,3 +138,47 @@
   font-size: 20px;
   font-weight: 500;
 }
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+  .bodyWrapper {
+    gap: 40px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .bodyWrapper {
+    gap: 24px;
+  }
+  .top {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .navContainer {
+    gap: 8px;
+  }
+  .mainSection {
+    gap: 10px;
+
+    padding: 24px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--gray_DDDDDD);
+    background: var(--white_FFFFFF);
+  }
+  .listTitle {
+    font-size: 18px;
+  }
+  .habitList {
+    gap: 12px;
+    height: 450px;
+  }
+  .emptyMessage {
+    height: 474px;
+
+    font-size: 16px;
+  }
+}
