@@ -12,19 +12,19 @@ const StudyDetailPage = () => {
       isCompleted: [true, true, false, true, false, false, false],
     },
     {
-      title: '미라클모닝 6시 기상',
+      title: '아침 챙겨 먹기',
       isCompleted: [true, true, false, true, false, false, true],
     },
     {
-      title: '미라클모닝 6시 기상',
+      title: 'React 스터디 책 1챕터 읽기',
       isCompleted: [false, true, false, true, false, true, false],
     },
     {
-      title: '미라클모닝 6시 기상',
+      title: '스트레칭',
       isCompleted: [true, true, false, false, true, false, false],
     },
     {
-      title: '미라클모닝 6시 기상',
+      title: '사이드 프로젝트',
       isCompleted: [false, true, false, true, false, false, true],
     },
   ];
@@ -117,15 +117,20 @@ const StudyDetailPage = () => {
               return (
                 <tr key={`habit-${d_i}`}>
                   <th>{data.title}</th>
-                  {data.isCompleted.map((complete, c_i) => (
-                    <td key={`complete-${c_i}`}>
-                      {complete ? (
-                        <img src={sticker1} alt="완료" />
-                      ) : (
-                        <img src={stickerEmpty} alt="완료 못함" />
-                      )}
-                    </td>
-                  ))}
+                  {data.isCompleted.map((complete, c_i) => {
+                    return (
+                      <td key={`complete-${c_i}`}>
+                        {complete ? (
+                          <img
+                            src={`/stickers/ic_sticker_${d_i}.svg`}
+                            alt="완료"
+                          />
+                        ) : (
+                          <img src={stickerEmpty} alt="완료 못함" />
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               );
             })}
