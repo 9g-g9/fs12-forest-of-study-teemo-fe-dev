@@ -5,10 +5,10 @@ import styles from './Create.module.css';
 import Header from '../../components/Header/Header';
 import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
-import PasswordCheck from './components/PasswordCheck';
-import StudyName from './components/StudyName';
-import Introduce from './components/Introduce';
-import CreateButton from '../Create/components/CreateButton';
+import PasswordCheck from '../../components/CreateComponents/PasswordCheck';
+import StudyName from '../../components/CreateComponents/StudyName';
+import Introduce from '../../components/CreateComponents/Introduce/Introduce';
+import CreateButton from '../../components/CreateComponents/CreateButton/CreateButton';
 import { useState } from 'react';
 
 const StudyCreate = () => {

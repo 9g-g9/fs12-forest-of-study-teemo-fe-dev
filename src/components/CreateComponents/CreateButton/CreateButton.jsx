@@ -1,4 +1,4 @@
-import styles from '../css/CreateButton.module.css';
+import styles from './CreateButton.module.css';
 
 const CreateButton = ({ onClick }) => {
   return (

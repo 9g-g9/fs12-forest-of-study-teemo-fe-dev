@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/Introduce.module.css';
+import styles from './Introduce.module.css';
 import { useState } from 'react';
 
 const Introduce = () => {
