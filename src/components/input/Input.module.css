@@ -7,6 +7,7 @@
   transition: none;
   outline: none;
   position: relative;
+  display: block;
 }
 
 .errorMessage {
@@ -18,13 +19,13 @@
 }
 
 .inputContainer {
-  margin-bottom: 50px;
-  width: 648px;
+  margin-bottom: 24px;
+  width: 100%;
 }
 
 .inputError {
   border: 1px solid var(--error_C41013);
-  width: 648px;
+  width: 100%;
   height: 48px;
   border-radius: 15px;
   box-sizing: border-box;
@@ -43,6 +44,11 @@
   position: relative;
 }
 
+.passwordContainers {
+  margin-bottom: 40px;
+  width: 100%;
+}
+
 .inputWrapper {
   position: relative;
 }
@@ -57,4 +63,5 @@
 .input,
 .inputError {
   padding-left: 20px;
+  display: block;
 }
