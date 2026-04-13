@@ -1,0 +1,46 @@
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 47px;
+  border-radius: 12px;
+  font-weight: 500;
+
+  padding: 14px 28px;
+
+  margin: 0 auto;
+}
+
+.toastS {
+  width: 223px;
+}
+
+.toastL {
+  width: 400px;
+}
+
+.toastSuccess {
+  background-color: var(--green_E1EDDE);
+  color: var(--green_text_578246);
+}
+
+.toastError {
+  background-color: var(--pink_FDE0E9);
+  color: var(--red_F50E0E);
+}
+
+@media (max-width: 768px) {
+  .toast {
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .toastS {
+    width: 202px;
+  }
+
+  .toastL {
+    width: 370px;
+  }
+}
