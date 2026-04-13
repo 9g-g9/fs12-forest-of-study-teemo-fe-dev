@@ -3,7 +3,10 @@ import styles from './TodayHabitPage.module.css';
 import LinkButton from '../../components/LinkButton/LinkButton';
 
 const TodayHabitPage = () => {
-  const mockHabits = [];
+  const mockHabits = [
+    { id: 1, name: '1번 습관', isCompleted: true },
+    { id: 2, name: '2번 습관', isCompleted: false },
+  ];
 
   return (
     <>
