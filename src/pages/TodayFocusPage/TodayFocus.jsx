@@ -1,12 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import icArrowRight from '../../assets/icons/ic_arrow_right.svg';
 import icPoint from '../../assets/icons/ic_point.svg';
 import icPlay from '../../assets/icons/ic_play.svg';
 import icPause from '../../assets/icons/ic_pause.svg';
 import icRestart from '../../assets/icons/ic_restart.svg';
 import icTimer from '../../assets/icons/ic_timer.svg';
 import styles from './TodayFocus.module.css';
+import LinkButton from '../../components/LinkButton/LinkButton';
 
 const TodayFocus = () => {
   return (
@@ -16,18 +14,9 @@ const TodayFocus = () => {
           <header className={styles.header}>
             <h1 className={styles.title}>연우의 개발공장</h1>
             <nav className={styles.navContainer}>
-              <Link to="/:id/habit" className={styles.nav}>
-                <p>오늘의 습관</p>
-                <img src={icArrowRight} />
-              </Link>
-              <Link to="/:id/logs" className={styles.nav}>
-                <p>로그</p>
-                <img src={icArrowRight} />
-              </Link>
-              <Link to="/:id/detail" className={styles.nav}>
-                <p>홈</p>
-                <img src={icArrowRight} />
-              </Link>
+              <LinkButton text="오늘의 습관" url="/:id/habit" />
+              <LinkButton text="로그" url="/:id/logs" />
+              <LinkButton text="홈" url="/:id/detail" />
             </nav>
           </header>
           <div className={styles.pointContainer}>
