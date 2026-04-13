@@ -13,7 +13,7 @@ const App = () => {
         <Route path="/" element={<StudyLayout />}>
           {/* 홈페이지는 <Route index element={<페이지 컴포넌트 />} /> 로 추가하기 */}
           {/* 각 페이지 <Route path="url" element={<페이지 컴포넌트 />} /> 로 추가하기 */}
-          <Route path="/:id/focus" element={<TodayFocus />} />
+          <Route path=":id/focus" element={<TodayFocus />} />
         </Route>
       </Routes>
     </>
