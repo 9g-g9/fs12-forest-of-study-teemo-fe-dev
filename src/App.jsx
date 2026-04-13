@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import StudyLayout from './layouts/StudyLayout';
 import TodayFocus from './pages/TodayFocusPage/TodayFocus';
 import LogPage from './pages/LogPage/LogPage';
+import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           {/* 각 페이지 <Route path="url" element={<페이지 컴포넌트 />} /> 로 추가하기 */}
           <Route path=":id/focus" element={<TodayFocus />} />
           <Route path=":id/logs" element={<LogPage />} />
+          <Route path=":id/detail" element={<StudyDetailPage />} />
         </Route>
       </Routes>
     </>
