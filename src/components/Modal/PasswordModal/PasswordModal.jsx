@@ -40,7 +40,7 @@ const PasswordModal = ({
         <div className={styles.footer}>
           <Button
             btnTxt={btnTxt}
-            btnStyle="btnConfirm"
+            btnStyle="btnDefault"
             onClick={onClick}
             btnType={btnType}
           />
