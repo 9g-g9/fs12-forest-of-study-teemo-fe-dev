@@ -82,7 +82,14 @@ const StudyList = () => {
   return (
     <main className={styles.page}>
       <div className="wrapper">
-        <RecentListPage recentStudyList={recentStudyList} />
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>최근 조회한 스터디</h2>
+          <div className={styles.recentGrid}>
+            {recentStudyList.map((study) => {
+              return <Card key={study.id} study={study} />;
+            })}
+          </div>
+        </section>
       </div>
 
       <div className="wrapper">
