@@ -20,8 +20,7 @@ const Toast = ({
     <div
       className={`${styles.toast} ${styles[toastClassName]} ${styles[toastSize]}`}
     >
-      {toastType === 'success' && <p>🎉 {toastMsg}</p>}
-      {toastType === 'error' && <p>🚨 {toastMsg}</p>}
+      {toastType === 'success' ? <p>🎉 {toastMsg}</p> : <p>🚨 {toastMsg}</p>}
     </div>
   );
 };
