@@ -30,16 +30,17 @@
 
 @media (max-width: 768px) {
   .searchField {
-    max-width: none;
-    height: 56px;
-    gap: 12px;
-    padding: 0 22px;
-    border-radius: 20px;
+    width: 100%;
+    height: 42px;
+    gap: 10px;
+    padding: 0 20px;
+    border-radius: 15px;
   }
 
   .searchIcon {
     width: 24px;
     height: 24px;
+    margin: 10px 10px;
   }
 
   .input {

@@ -2,7 +2,6 @@ import Card from '../../components/StudyComponents/StudyList/Card';
 import Pagination from '../../components/StudyComponents/StudyList/Pagination';
 import Search from '../../components/StudyComponents/StudyList/Search';
 import Sort from '../../components/StudyComponents/StudyList/Sort';
-import RecentListPage from './RecentListPage';
 import styles from './StudyListPage.module.css';
 
 const recentStudyList = [
