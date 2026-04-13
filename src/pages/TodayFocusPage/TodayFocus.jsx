@@ -5,8 +5,40 @@ import icRestart from '../../assets/icons/ic_restart.svg';
 import icTimer from '../../assets/icons/ic_timer.svg';
 import styles from './TodayFocus.module.css';
 import LinkButton from '../../components/LinkButton/LinkButton';
+import { useEffect, useRef, useState } from 'react';
 
 const TodayFocus = () => {
+  const [timer, setTimer] = useState(1500000);
+  const [timerStatus, setTimerStatus] = useState('');
+
+  const formattedTime = (ms) => {
+    const s = Math.floor((ms / 1000) % 60);
+    const m = Math.floor((ms / (1000 * 60)) % 60);
+    const h = Math.floor((ms / (1000 * 60 * 60)) % 24);
+    if (h >= 1) {
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  };
+
+  const timerRef = useRef();
+
+  useEffect(() => {
+    if (timerStatus === 'IN_PROGRESS') {
+      timerRef.current = setInterval(() => {
+        setTimer((prev) => prev - 1000);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timerRef.current);
+    };
+  }, [timerStatus]);
+
+  const timerStartHandler = () => {
+    setTimerStatus('IN_PROGRESS');
+  };
+
   return (
     <div className="wrapper">
       <div className={styles.focusWrapper}>
@@ -36,18 +68,30 @@ const TodayFocus = () => {
             </button>
           </div>
           <div className={styles.timerContainer}>
-            <h3>25:00</h3>
+            <h3
+              className={timerStatus === 'IN_PROGRESS' ? styles.inProgress : ''}
+            >
+              {formattedTime(timer)}
+            </h3>
             <div className={styles.timerControlContainer}>
-              <button className={`${styles.pauseBtn} ${styles.ctrlBtn}`}>
-                <img src={icPause} />
-              </button>
-              <button className={styles.startBtn}>
+              {timerStatus === 'IN_PROGRESS' && (
+                <button className={`${styles.pauseBtn} ${styles.ctrlBtn}`}>
+                  <img src={icPause} />
+                </button>
+              )}
+              <button
+                className={styles.startBtn}
+                onClick={timerStartHandler}
+                disabled={timerStatus === 'IN_PROGRESS'}
+              >
                 <img src={icPlay} />
                 Start!
               </button>
-              <button className={`${styles.restartBtn} ${styles.ctrlBtn}`}>
-                <img src={icRestart} />
-              </button>
+              {timerStatus === 'IN_PROGRESS' && (
+                <button className={`${styles.restartBtn} ${styles.ctrlBtn}`}>
+                  <img src={icRestart} />
+                </button>
+              )}
             </div>
           </div>
         </main>
