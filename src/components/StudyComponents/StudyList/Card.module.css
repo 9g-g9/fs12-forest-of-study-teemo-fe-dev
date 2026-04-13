@@ -1,0 +1,100 @@
+:root {
+  --card_black_opacity_10: rgba(0, 0, 0, 0.1);
+  --card_black_opacity_40: rgba(0, 0, 0, 0.4);
+  --card_black_opacity_50: rgba(0, 0, 0, 0.5);
+}
+
+.cardBackground {
+  display: flex;
+  width: 100%;
+  min-height: 243px;
+  border-radius: 20px;
+  border: 1px solid var(--card_black_opacity_10);
+  background: var(--green_E1EDDE);
+}
+
+.cardInner {
+  display: flex;
+  width: calc(100% - 60px);
+  flex-direction: column;
+  align-items: stretch;
+  margin: 30px 30px;
+}
+
+.titleDate {
+  width: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  color: var(--white_FFFFFF);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cardPoint {
+  display: flex;
+  min-width: 86px;
+  height: 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  color: var(--white_FFFFFF);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 50px;
+  border: 1px solid var(--card_black_opacity_10);
+  background: var(--card_black_opacity_50);
+}
+
+.pointIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.cardProgressText {
+  color: var(--gray_EEEEEE);
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  margin-bottom: 30px;
+}
+
+.cardDescription {
+  color: var(--white_FFFFFF);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px; /* 150% */
+  margin-bottom: 54px;
+}
+
+.cardEmojiTagDiv {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+.cardEmojiTag {
+  display: flex;
+  padding: 6px 8px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 50px;
+  background: var(--card_black_opacity_40);
+  color: var(--white_FFFFFF);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
