@@ -1,6 +1,7 @@
 import styles from './TotalPoint.module.css';
 import icPoint from '../../assets/icons/ic_point.svg';
 import { useEffect, useState } from 'react';
+import { getTotalPoint } from '../../services/pointService';
 
 /* ----------------------------------
             총합 포인트 컴포넌트
@@ -19,21 +20,12 @@ const TotalPoint = ({ id, size, theme }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const getTotalPoint = async () => {
-      try {
-        const res = await fetch(`http://localhost:8080/api/points/${id}`);
-        if (!res.ok) {
-          throw new Error('데이터 로딩에 실패했습니다');
-        }
-        const { data } = await res.json();
-
-        setTotal(data.totalPoint);
-      } catch (error) {
-        console.error(error);
-      }
+    const fetchTotalPoint = async () => {
+      const totalPoint = await getTotalPoint(id);
+      setTotal(totalPoint);
     };
 
-    getTotalPoint();
+    fetchTotalPoint();
   }, [id, total]);
 
   return (
