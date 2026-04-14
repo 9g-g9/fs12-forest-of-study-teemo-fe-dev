@@ -45,3 +45,25 @@
     width: 130px;
   }
 }
+
+.btnCreate {
+  display: flex;
+  width: 100%;
+  height: 58px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  border: none;
+  background: var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.btnCreate:hover {
+  background-color: var(--green_text_578246);
+}
