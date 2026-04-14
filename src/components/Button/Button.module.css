@@ -55,10 +55,9 @@
   align-items: center;
   border-radius: 16px;
   border: none;
-  background: #99c08e;
-  color: #fff;
+  background: var(--brand_99C08E);
+  color: var(--white_FFFFFF);
   text-align: center;
-  font-family: 'JejuStoneWall';
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

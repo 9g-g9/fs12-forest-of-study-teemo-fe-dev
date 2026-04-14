@@ -9,6 +9,7 @@ import StudyName from '../../components/CreateComponents/StudyName';
 import Introduce from '../../components/CreateComponents/Introduce/Introduce';
 import Button from '../../components/Button/Button';
 import { useState } from 'react';
+import BackGround from '../../components/CreateComponents/BackGround/BackGround';
 
 const StudyCreate = () => {
   const [nickname, setNickname] = useState('');
@@ -31,8 +32,10 @@ const StudyCreate = () => {
             <h3 className={styles.title}>소개</h3>
             <Introduce />
 
-            <h3 className={styles.title}>배경을 선택해주세요</h3>
-            <input />
+            <div>
+              <h3 className={styles.title}>배경을 선택해주세요</h3>
+              <BackGround />
+            </div>
           </div>
 
           <h3 className={styles.title}>비밀번호</h3>
