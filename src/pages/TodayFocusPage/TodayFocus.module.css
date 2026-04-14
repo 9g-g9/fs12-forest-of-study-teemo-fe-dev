@@ -95,6 +95,10 @@
   font-weight: 800;
 }
 
+.inProgress {
+  color: var(--red_F50E0E);
+}
+
 .timerControlContainer {
   display: flex;
   gap: 24px;
@@ -114,6 +118,10 @@
 
 .startBtn:hover {
   background: var(--green_text_578246);
+}
+
+.startBtn:disabled {
+  background: var(--gray_818181);
 }
 
 .ctrlBtn {
