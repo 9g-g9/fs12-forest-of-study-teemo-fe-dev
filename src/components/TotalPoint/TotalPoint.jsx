@@ -16,7 +16,7 @@ import icPoint from '../../assets/icons/ic_point.svg';
 const TotalPoint = ({ size, theme }) => {
   return (
     <div
-      className={`${size === 'm' ? styles.point : styles.pointSmall} ${theme === 'dark' ? styles.dark : ''}`}
+      className={`${styles.point} ${size === 'm' ? styles.medium : ''} ${theme === 'dark' ? styles.dark : ''}`}
     >
       <img src={icPoint} alt="총합 포인트 아이콘" />
       <p>310p 획득</p>
