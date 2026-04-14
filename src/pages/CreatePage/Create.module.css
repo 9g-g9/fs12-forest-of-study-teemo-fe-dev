@@ -25,10 +25,22 @@
 
 .title {
   margin-bottom: 16px;
+  color: var(--black-black_414141, #414141);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .bigTitle {
   margin-bottom: 24px;
+  color: var(--black-black_414141, #414141);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
 }
 
 .btn {
