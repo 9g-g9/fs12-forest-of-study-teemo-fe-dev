@@ -7,6 +7,7 @@ import StudyLayout from './layouts/StudyLayout';
 import StudyListPage from './pages/StudyListPage/StudyListPage';
 import TodayFocus from './pages/TodayFocusPage/TodayFocus';
 import LogPage from './pages/LogPage/LogPage';
+import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 import TodayHabitPage from './pages/TodayHabitPage/TodayHabitPage';
 
 const App = () => {
@@ -15,9 +16,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<StudyLayout />}>
           <Route index element={<StudyListPage />} />
+          {/* 홈페이지는 <Route index element={<페이지 컴포넌트 />} /> 로 추가하기 */}
           {/* 각 페이지 <Route path="url" element={<페이지 컴포넌트 />} /> 로 추가하기 */}
           <Route path=":id/focus" element={<TodayFocus />} />
           <Route path=":id/logs" element={<LogPage />} />
+          <Route path=":id/detail" element={<StudyDetailPage />} />
           <Route path=":id/habit" element={<TodayHabitPage />} />
         </Route>
       </Routes>
