@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../../components/input/Input.module.css';
+import styles from '../input/Input.module.css';
 
 const StudyName = ({ title, setTitle }) => {
   const [error, setError] = useState('');
