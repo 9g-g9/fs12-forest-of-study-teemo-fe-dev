@@ -10,13 +10,14 @@ import img6 from '../../../assets/images/img6.png';
 import img7 from '../../../assets/images/img7.png';
 import img8 from '../../../assets/images/img8.png';
 
-const BackGround = () => {
+const BackGround = ({ setBackground }) => {
   const images = [img1, img2, img3, img4, img5, img6, img7, img8];
 
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleClick = (img) => {
     setSelectedImage(img);
+    setBackground(img);
   };
 
   return (
