@@ -1,0 +1,74 @@
+.layoutCreate {
+  background: var(--bg_F6F4EF);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 107px;
+  width: 100%;
+}
+
+.wrapperCreate {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 648px;
+  min-height: 1107px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: var(--white_FFFFFF);
+  padding: 24px 24px 40px 24px;
+  align-items: stretch;
+
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 16px;
+}
+
+.bigTitle {
+  margin-bottom: 24px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+  cursor: pointer;
+  font-family: 'JejuStoneWall';
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.btn:hover {
+  background-color: var(--green_text_578246);
+}
+
+.btn:active {
+  background-color: var(--green_text_578246);
+}
+
+.btn.error {
+  background-color: var(--error_C41013);
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 24px;
+  }
+  .layout {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 16px;
+  }
+  .layout {
+    padding: 16px;
+  }
+}
