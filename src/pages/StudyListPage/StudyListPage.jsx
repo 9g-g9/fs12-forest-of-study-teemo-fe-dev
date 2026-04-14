@@ -3,6 +3,14 @@ import Pagination from '../../components/StudyComponents/StudyList/Pagination';
 import Search from '../../components/StudyComponents/StudyList/Search';
 import Sort from '../../components/StudyComponents/StudyList/Sort';
 import styles from './StudyListPage.module.css';
+import Emoji from '../../components/Emoji/Emoji';
+
+// 이모지 테스트
+// const mockEmojis = [
+//   { id: 1, emoji: '👍🏻', count: 11 },
+//   { id: 2, emoji: '🤩', count: 9 },
+//   { id: 3, emoji: '🙇🏻‍♀️', count: 37 },
+// ];
 
 const recentStudyList = [
   {
@@ -124,6 +132,11 @@ const StudyList = () => {
           <div className={styles.paginationWrapper}>
             <Pagination currentPage={1} pages={[1, 2, 3, 4, 5]} />
           </div>
+          {/* <div style={{ display: 'flex', gap: '8px' }}>
+            {mockEmojis.map((item) => (
+              <Emoji key={item.id} emoji={item.emoji} count={item.count} />
+            ))}
+          </div> */}
         </section>
       </div>
     </main>
