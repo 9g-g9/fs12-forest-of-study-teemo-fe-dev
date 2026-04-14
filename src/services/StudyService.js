@@ -1,4 +1,4 @@
-const STUDY_API_URL = 'http://localhost:3030/studies';
+const STUDY_API_URL = 'http://localhost:3030/api/studies';
 const RECENT_STUDY_LIST_KEY = 'recentStudyList';
 
 const normalizeStudy = (study) => ({
