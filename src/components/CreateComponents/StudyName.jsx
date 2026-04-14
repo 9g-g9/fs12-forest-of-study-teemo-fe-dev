@@ -9,6 +9,9 @@ const StudyName = ({ title, setTitle }) => {
     if (!value) {
       return '*스터디 이름을 입력해주세요';
     }
+    if (/\s/.test(value)) {
+      return '공백은 사용할 수 없습니다.';
+    }
     return '';
   };
 

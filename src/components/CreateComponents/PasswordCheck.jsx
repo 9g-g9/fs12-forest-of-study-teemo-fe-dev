@@ -12,6 +12,9 @@ const PasswordCheck = ({ password, passwordCheck, setPasswordCheck }) => {
     if (!value) {
       return '필수 입력사항입니다.';
     }
+    if (/\s/.test(value)) {
+      return '공백은 사용할 수 없습니다.';
+    }
     if (value.length < 8) {
       return '비밀번호는 8자 이상이어야 합니다.';
     }
