@@ -1,0 +1,144 @@
+.flexBtwWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emojiWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emojiContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.emojiContainer li {
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  color: var(--white_FFFFFF);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.emojiAddBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 8px;
+}
+
+/* 공유 수정 삭제 버튼 */
+
+.interContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.greenText {
+  color: var(--green_text_578246);
+}
+
+.grayText {
+  color: var(--gray_818181);
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 타이틀 */
+.introWrapper {
+  margin-bottom: 40px;
+  margin-top: 24px;
+}
+
+.titleContainer {
+  margin-bottom: 16px;
+}
+
+/* 소개말 및 포인트 */
+.descWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.descContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.descTitle {
+  font-size: 18px;
+  color: var(--gray_818181);
+}
+
+.descContent {
+  font-size: 18px;
+}
+
+.pointLog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 8px 12px;
+
+  font-weight: 600;
+}
+
+/* 습관 기록표 */
+.innerWrapper {
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid var(--gray_DDDDDD);
+  background: var(--white_FFFFFF);
+
+  padding: 24px;
+}
+
+/* 습관 기록표 - table */
+.habitTable {
+  width: 100%;
+}
+
+.habitTable th {
+  font-size: 18px;
+}
+
+.habitTable > thead th {
+  color: var(--gray_818181);
+  font-weight: 400;
+}
+
+.habitTable > thead th:first-child {
+  width: 25%;
+}
+
+.habitTable > tbody th {
+  text-align: right;
+}
+
+.habitTable td > img {
+  margin: 14px auto;
+}
