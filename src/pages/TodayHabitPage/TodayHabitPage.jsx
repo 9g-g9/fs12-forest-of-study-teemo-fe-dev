@@ -18,6 +18,7 @@ const TodayHabitPage = () => {
   const [newHabit, setNewHabit] = useState('');
   const [habits, setHabits] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [togglingId, setTogglingId] = useState(null);
 
   const { id } = useParams();
 
@@ -35,8 +36,13 @@ const TodayHabitPage = () => {
     fetchHabits();
   }, [id]);
 
+  // 습관 토글
   const onToggleHabitHandler = async (habitId) => {
+    if (togglingId === habitId) return;
+
     try {
+      setTogglingId(habitId);
+
       await toggleHabit(id, habitId);
 
       setHabits((prevHabits) =>
@@ -46,6 +52,8 @@ const TodayHabitPage = () => {
       );
     } catch (error) {
       console.error(error);
+    } finally {
+      setTogglingId(null);
     }
   };
 
