@@ -37,7 +37,7 @@ const StudyCreate = () => {
       console.log('성공:', res);
       alert('스터디 생성 완료!');
 
-      navigate(`/study/${res.id}`);
+      navigate(`/${res.id}/detail`);
     } catch (error) {
       console.error(error);
       alert('생성 실패');
