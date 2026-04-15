@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TodayHabitPage.module.css';
 import LinkButton from '../../components/LinkButton/LinkButton';
+import HabitList from '../../components/HabitComponents/HabitList';
+import HabitListHeader from '../../components/HabitComponents/HabitListHeader';
+import { useParams } from 'react-router-dom';
 
 const TodayHabitPage = () => {
-  const mockHabits = [
-    { id: 1, name: '1번 습관', isCompleted: true },
-    { id: 2, name: '2번 습관', isCompleted: false },
-  ];
+  const [habits, setHabits] = useState([]);
+  const [studyName, setStudyName] = useState('');
+
+  const { id } = useParams();
+
+  const fetchTodayHabits = async () => {
+    try {
+      const response = await fetch(`/api/studies/${id}/habits/today`);
+      const result = await response.json();
+
+      console.log(result);
+      setHabits(result.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodayHabits();
+  }, []);
+
+  const onOpenModalHandler = () => {
+    console.log('모달 열기');
+  };
 
   return (
     <>
@@ -28,27 +51,8 @@ const TodayHabitPage = () => {
           </section>
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
-              <div className={styles.listHeader}>
-                <h2 className={styles.listTitle}>오늘의 습관</h2>
-                <button className={styles.listConfirm}>목록 수정</button>
-              </div>
-              <div className={styles.habitList}>
-                {mockHabits.length === 0 ? (
-                  <div className={styles.emptyMessage}>
-                    <p>아직 습관이 없어요</p>
-                    <p>목록 수정을 눌러 습관을 생성해보세요</p>
-                  </div>
-                ) : (
-                  mockHabits.map((h) => (
-                    <div
-                      key={h.id}
-                      className={`${styles.habitItem} ${h.isCompleted ? styles.completed : styles.notComplete}`}
-                    >
-                      {h.name}
-                    </div>
-                  ))
-                )}
-              </div>
+              <HabitListHeader onOpenModal={onOpenModalHandler} />
+              <HabitList habits={habits} />
             </div>
           </section>
         </div>
