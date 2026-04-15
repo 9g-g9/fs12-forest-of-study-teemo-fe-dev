@@ -38,12 +38,6 @@ const PasswordModal = ({
         </div>
         <div className={styles.body}>{children}</div>
         <div className={styles.footer}>
-          <Button
-            btnTxt={btnTxt}
-            btnStyle="btnDefault"
-            onClick={onClick}
-            btnType={btnType}
-          />
           <button
             type="button"
             onClick={onClose}
