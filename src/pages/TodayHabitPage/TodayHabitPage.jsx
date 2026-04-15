@@ -6,6 +6,11 @@ import { useParams } from 'react-router-dom';
 import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import HabitHeader from '../../components/HabitComponents/HabitHeader';
+import {
+  getStudyName,
+  getTodayHabits,
+  postHabit,
+} from '../../services/HabitService';
 
 const TodayHabitPage = () => {
   const [studyName, setStudyName] = useState('');
@@ -16,39 +21,27 @@ const TodayHabitPage = () => {
 
   const { id } = useParams();
 
-  // 스터디명 조회
   const fetchStudy = async () => {
     try {
-      const response = await fetch('/api/studies');
-      const result = await response.json();
-
-      if (!result.success) return;
-
-      const currentStudy = result.data.find((study) => study.id === Number(id));
-
-      if (!currentStudy) return;
-
-      setStudyName(currentStudy.title);
+      const title = await getStudyName(id);
+      setStudyName(title);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // 습관 조회
-  const fetchTodayHabits = async () => {
+  const fetchHabits = async () => {
     try {
-      const response = await fetch(`/api/habits/${id}/today`);
-      const result = await response.json();
-
-      setHabits(result.data);
+      const data = await getTodayHabits(id);
+      setHabits(data);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchTodayHabits();
     fetchStudy();
+    fetchHabits();
   }, [id]);
 
   // 모달 열기
@@ -62,27 +55,16 @@ const TodayHabitPage = () => {
     setNewHabit('');
   };
 
-  // 습관 생성
   const createHabit = async () => {
-    if (!newHabit.trim() || isSubmitting) return;
+    if (!newHabit.trim() || isSubmitting) {
+      return;
+    }
 
     try {
       setIsSubmitting(true);
-
-      const response = await fetch(`/api/habits/${id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: newHabit }),
-      });
-
-      const result = await response.json();
-
-      if (!result.success) return;
-
+      await postHabit(id, newHabit);
       onCloseModalHandler();
-      fetchTodayHabits();
+      fetchHabits();
     } catch (error) {
       console.error(error);
     } finally {
