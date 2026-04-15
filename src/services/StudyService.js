@@ -1,6 +1,28 @@
-const STUDY_API_URL = 'http://localhost:3030/api/studies';
+const STUDY_API_URL = 'http://localhost:8080/api/studies';
 const RECENT_STUDY_LIST_KEY = 'recentStudyList';
 
+// N일째 진행 중 데이터 계산
+const getStudyProgressText = (createdAt) => {
+  if (!createdAt) {
+    return '';
+  }
+
+  const createdDateText = createdAt.split('T')[0];
+  const todayDateText = new Date().toISOString().split('T')[0];
+  const createdDate = new Date(`${createdDateText}T00:00:00`);
+  const todayDate = new Date(`${todayDateText}T00:00:00`);
+
+  if (Number.isNaN(createdDate.getTime()) || Number.isNaN(todayDate.getTime())) {
+    return '';
+  }
+
+  const diffTime = todayDate.getTime() - createdDate.getTime();
+  const diffDays = Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
+
+  return `${diffDays + 1}일째 진행 중`;
+};
+
+// 스터디 데이터 
 const normalizeStudy = (study) => ({
   id: study.id,
   nickname: study.nickname ?? '',
@@ -9,12 +31,24 @@ const normalizeStudy = (study) => ({
   background: study.background ?? '',
   createdAt: study.createdAt ?? '',
   updatedAt: study.updatedAt ?? '',
-  progressText: study.progressText ?? '',
+  progressText: study.progressText || getStudyProgressText(study.createdAt),
   rewardPoint: study.rewardPoint ?? 0,
   commentCount: study.commentCount ?? 0,
   fireCount: study.fireCount ?? 0,
   heartCount: study.heartCount ?? 0,
 });
+
+const extractStudyList = (payload) => {
+  if (Array.isArray(payload)) {
+    return payload;
+  }
+
+  if (Array.isArray(payload?.data)) {
+    return payload.data;
+  }
+
+  return [];
+};
 
 // 스터디 목록 불러오기
 export const getStudyList = async () => {
@@ -25,10 +59,10 @@ export const getStudyList = async () => {
   }
 
   const data = await response.json();
+  const studyList = extractStudyList(data);
 
-  return data.map(normalizeStudy);
+  return studyList.map(normalizeStudy);
 };
-
 
 // 로컬 스토리지 사용하여 최근 스터디 목록 불러오기
 export const getRecentStudyList = () => {
@@ -52,12 +86,15 @@ export const getRecentStudyList = () => {
 export const saveRecentStudy = (study) => {
   const recentStudyList = getRecentStudyList();
   const filteredStudyList = recentStudyList.filter(
-    (recentStudy) => recentStudy.id !== study.id
+    (recentStudy) => recentStudy.id !== study.id,
   );
-  const nextRecentStudyList = [normalizeStudy(study), ...filteredStudyList].slice(
-    0,
-    3
-  );
+  const nextRecentStudyList = [
+    normalizeStudy(study),
+    ...filteredStudyList,
+  ].slice(0, 3);
 
-  localStorage.setItem(RECENT_STUDY_LIST_KEY, JSON.stringify(nextRecentStudyList));
+  localStorage.setItem(
+    RECENT_STUDY_LIST_KEY,
+    JSON.stringify(nextRecentStudyList),
+  );
 };
