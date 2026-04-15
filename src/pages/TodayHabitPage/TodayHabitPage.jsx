@@ -6,11 +6,7 @@ import { useParams } from 'react-router-dom';
 import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import HabitHeader from '../../components/HabitComponents/HabitHeader';
-import {
-  getStudyName,
-  getTodayHabits,
-  postHabit,
-} from '../../services/HabitService';
+import { getTodayHabits, postHabit } from '../../services/HabitService';
 
 const TodayHabitPage = () => {
   const [studyName, setStudyName] = useState('');
@@ -21,26 +17,17 @@ const TodayHabitPage = () => {
 
   const { id } = useParams();
 
-  const fetchStudy = async () => {
-    try {
-      const title = await getStudyName(id);
-      setStudyName(title);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const fetchHabits = async () => {
     try {
       const data = await getTodayHabits(id);
-      setHabits(data);
+      setStudyName(data.studyTitle);
+      setHabits(data.habits);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchStudy();
     fetchHabits();
   }, [id]);
 
