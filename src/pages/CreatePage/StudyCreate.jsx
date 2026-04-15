@@ -9,7 +9,7 @@ import StudyName from '../../components/CreateComponents/StudyName';
 import Introduce from '../../components/CreateComponents/Introduce/Introduce';
 import Button from '../../components/Button/Button';
 import BackGround from '../../components/CreateComponents/BackGround/BackGround';
-import createStudy from '../../services/CreateService';
+import { createStudy } from '../../services/CreateService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,7 +37,7 @@ const StudyCreate = () => {
       console.log('성공:', res);
       alert('스터디 생성 완료!');
 
-      navigate(`/study/${res.id}`);
+      navigate(`/${res.id}/detail`);
     } catch (error) {
       console.error(error);
       alert('생성 실패');

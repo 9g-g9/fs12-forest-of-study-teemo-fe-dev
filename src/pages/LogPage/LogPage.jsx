@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import styles from "./LogPage.module.css";
 import LinkButton from '../../components/LinkButton/LinkButton';
+import CurrentTime from '../../components/CurrentTime/CurrentTime';
 
-const getToday = () => new Date().toLocaleDateString("sv-SE");
 
 const Logs = () => {
-  const [date, setDate] = useState(getToday());
   const [logType, setLogType] = useState("focus");
 
   const logs = {
@@ -51,13 +50,7 @@ const Logs = () => {
         <div className={styles.dateWrapper}>
         {/** 시간, 라디오버튼 */}
           <div className={styles.timeContainer}>
-            <span>현재 시간</span>
-            {/* <CurrentTime /> */}
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
+            <CurrentTime />
           </div>
 
           {/* 라디오 */}
