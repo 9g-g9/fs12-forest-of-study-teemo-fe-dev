@@ -1,58 +1,101 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TodayHabitPage.module.css';
-import LinkButton from '../../components/LinkButton/LinkButton';
+import HabitList from '../../components/HabitComponents/HabitList';
+import HabitListHeader from '../../components/HabitComponents/HabitListHeader';
+import { useParams } from 'react-router-dom';
+import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
+import CurrentTime from '../../components/CurrentTime/CurrentTime';
+import HabitHeader from '../../components/HabitComponents/HabitHeader';
+import {
+  getStudyName,
+  getTodayHabits,
+  postHabit,
+} from '../../services/HabitService';
 
 const TodayHabitPage = () => {
-  const mockHabits = [
-    { id: 1, name: '1번 습관', isCompleted: true },
-    { id: 2, name: '2번 습관', isCompleted: false },
-  ];
+  const [studyName, setStudyName] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newHabit, setNewHabit] = useState('');
+  const [habits, setHabits] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { id } = useParams();
+
+  const fetchStudy = async () => {
+    try {
+      const title = await getStudyName(id);
+      setStudyName(title);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchHabits = async () => {
+    try {
+      const data = await getTodayHabits(id);
+      setHabits(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudy();
+    fetchHabits();
+  }, [id]);
+
+  // 모달 열기
+  const onOpenModalHandler = () => {
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const onCloseModalHandler = () => {
+    setIsModalOpen(false);
+    setNewHabit('');
+  };
+
+  const createHabit = async () => {
+    if (!newHabit.trim() || isSubmitting) {
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await postHabit(id, newHabit);
+      onCloseModalHandler();
+      fetchHabits();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <>
       <div className="wrapper">
         <div className={styles.bodyWrapper}>
           <section className={styles.header}>
-            <div className={styles.top}>
-              <h1 className={styles.title}>스터디명</h1>
-              <nav className={styles.navContainer}>
-                <LinkButton text="오늘의 집중" url="/:id/focus" />
-                <LinkButton text="로그" url="/:id/logs" />
-                <LinkButton text="홈" url="/:id/detail" />
-              </nav>
-            </div>
-            <div className={styles.time}>
-              <p className={styles.timeTxt}>현재 시간</p>
-              <div className={styles.nowTime}>시계</div>
-            </div>
+            <HabitHeader studyName={studyName} id={id} />
+            <CurrentTime />
           </section>
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
-              <div className={styles.listHeader}>
-                <h2 className={styles.listTitle}>오늘의 습관</h2>
-                <button className={styles.listConfirm}>목록 수정</button>
-              </div>
-              <div className={styles.habitList}>
-                {mockHabits.length === 0 ? (
-                  <div className={styles.emptyMessage}>
-                    <p>아직 습관이 없어요</p>
-                    <p>목록 수정을 눌러 습관을 생성해보세요</p>
-                  </div>
-                ) : (
-                  mockHabits.map((h) => (
-                    <div
-                      key={h.id}
-                      className={`${styles.habitItem} ${h.isCompleted ? styles.completed : styles.notComplete}`}
-                    >
-                      {h.name}
-                    </div>
-                  ))
-                )}
-              </div>
+              <HabitListHeader onOpenModal={onOpenModalHandler} />
+              <HabitList habits={habits} />
             </div>
           </section>
         </div>
       </div>
+      {isModalOpen && (
+        <HabitConfirmModal
+          onClose={onCloseModalHandler}
+          onConfirm={createHabit}
+          newHabit={newHabit}
+          setNewHabit={setNewHabit}
+        />
+      )}
     </>
   );
 };
