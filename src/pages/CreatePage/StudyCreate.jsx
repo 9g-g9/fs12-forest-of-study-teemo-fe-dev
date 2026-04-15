@@ -9,7 +9,7 @@ import StudyName from '../../components/CreateComponents/StudyName';
 import Introduce from '../../components/CreateComponents/Introduce/Introduce';
 import Button from '../../components/Button/Button';
 import BackGround from '../../components/CreateComponents/BackGround/BackGround';
-import createStudy from '../../services/CreateService';
+import { createStudy } from '../../services/CreateService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
