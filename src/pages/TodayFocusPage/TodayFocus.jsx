@@ -5,13 +5,17 @@ import TotalPoints from '../../components/FocusComponents/TotalPoints';
 import TargetDuration from '../../components/FocusComponents/TargetDuration/TargetDuration';
 import Timer from '../../components/FocusComponents/Timer';
 import { useParams } from 'react-router-dom';
-import { upsertTimer } from '../../services/TimerService';
+import {
+  createTimer,
+  getTimer,
+  updateTargetDuration,
+} from '../../services/TimerService';
 
 const TodayFocus = () => {
-  const [targetDuration, setTargetDuration] = useState(1500000);
-  const [timer, setTimer] = useState(targetDuration);
-  const [timerStatus, setTimerStatus] = useState('CANCELED');
   const { id } = useParams();
+  const [targetDuration, setTargetDuration] = useState(0);
+  const [timerCount, setTimerCount] = useState(targetDuration);
+  const [timerStatus, setTimerStatus] = useState('CANCELED');
   const h = Math.floor((targetDuration / (1000 * 60 * 60)) % 24);
   const m = Math.floor((targetDuration / (1000 * 60)) % 60);
   const s = Math.floor((targetDuration / 1000) % 60);
@@ -25,21 +29,25 @@ const TodayFocus = () => {
 
   useEffect(() => {
     const fetchTimer = async () => {
-      const getTimer = await upsertTimer(Number(id));
+      const timer = await getTimer(Number(id));
+      if (!timer) {
+        const newTimer = await createTimer(Number(id));
+        setTargetDuration(newTimer.targetDuration);
+        return;
+      }
 
-      setTargetDuration(getTimer.targetDuration);
-      if (getTimer.status === 'CANCELED') {
-        setTimer(getTimer.targetDuration);
+      setTargetDuration(timer.targetDuration);
+      if (timer.status === 'CANCELED') {
+        setTimerCount(targetDuration);
       }
     };
-
     fetchTimer();
-  }, [id]);
+  }, [id, targetDuration]);
 
   useEffect(() => {
     if (timerStatus === 'IN_PROGRESS') {
       timerRef.current = setInterval(() => {
-        setTimer((prev) => prev - 1000);
+        setTimerCount((prev) => prev - 1000);
       }, 1000);
     }
 
@@ -128,6 +136,7 @@ const TodayFocus = () => {
       return;
     }
 
+    await updateTargetDuration(id, formattedMs);
     setTargetDuration(formattedMs);
     setToggleForm('DEFAULT');
     setError('');
@@ -159,7 +168,7 @@ const TodayFocus = () => {
             />
           </div>
           <Timer
-            timer={timer}
+            timer={timerCount}
             targetDuration={targetDuration}
             setTargetDuration={setTargetDuration}
             timerStatus={timerStatus}
