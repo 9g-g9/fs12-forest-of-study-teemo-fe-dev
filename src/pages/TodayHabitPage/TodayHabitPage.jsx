@@ -6,7 +6,11 @@ import { useParams } from 'react-router-dom';
 import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import HabitHeader from '../../components/HabitComponents/HabitHeader';
-import { getTodayHabits, postHabit } from '../../services/HabitService';
+import {
+  getTodayHabits,
+  postHabit,
+  toggleHabit,
+} from '../../services/HabitService';
 
 const TodayHabitPage = () => {
   const [studyName, setStudyName] = useState('');
@@ -30,6 +34,20 @@ const TodayHabitPage = () => {
   useEffect(() => {
     fetchHabits();
   }, [id]);
+
+  const onToggleHabitHandler = async (habitId) => {
+    try {
+      await toggleHabit(id, habitId);
+
+      setHabits((prevHabits) =>
+        prevHabits.map((h) =>
+          h.id === habitId ? { ...h, isCompleted: !h.isCompleted } : h,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // 모달 열기
   const onOpenModalHandler = () => {
@@ -70,7 +88,7 @@ const TodayHabitPage = () => {
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
               <HabitListHeader onOpenModal={onOpenModalHandler} />
-              <HabitList habits={habits} />
+              <HabitList habits={habits} onToggleHabit={onToggleHabitHandler} />
             </div>
           </section>
         </div>
