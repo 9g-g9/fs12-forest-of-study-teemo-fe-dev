@@ -12,7 +12,7 @@ const Interaction = ({ onClick }) => {
       </li>
       <li className={styles.grayText}>|</li>
       <li className={styles.grayText}>
-        <button>스터디 삭제하기</button>
+        <button onClick={() => onClick('delete')}>스터디 삭제하기</button>
       </li>
     </ul>
   );

@@ -1,53 +1,68 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
-import LinkButton from '../../components/LinkButton/LinkButton';
 import HabitTable from '../../components/StudyDetailComponents/HabitTable/HabitTable';
 import Emojis from '../../components/StudyDetailComponents/Emoji/EmojiContainer';
 import Interaction from '../../components/StudyDetailComponents/Interaction/Interaction';
-import Description from '../../components/StudyDetailComponents/Description/Description';
+import StudyDetail from '../../components/StudyDetailComponents/StudyDetail/StudyDetail';
+
 import PasswordModal from '../../components/Modal/PasswordModal/PasswordModal';
 import PasswordInput from '../../components/input/PasswordInput';
 import Button from '../../components/Button/Button';
-import { getStudyDetail } from '../../services/StudyDetailService';
+
+import Toast from '../../components/Toast/Toast';
 
 import styles from './StudyDetailPage.module.css';
-import icArrowRight from '../../assets/icons/ic_arrow_right.svg';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const StudyDetailPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const [btnTxt, setBtnTxt] = useState('수정하러 가기');
-  const [password, setPassword] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
 
-  const [study, setStudy] = useState([]);
+  const [btnTxt, setBtnTxt] = useState('수정하러 가기');
+  const [link, setLink] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [crtPassword, setCrtPassword] = useState('');
+  const [password, setPassword] = useState('');
 
   // 수정을 눌렀는지 습관을 눌렀는지 로그를 눌렀는지 . . .
-
   const modalHandler = (type) => {
     setIsOpen(true);
-
     switch (type) {
+      case 'delete':
+        setBtnTxt('삭제하기');
+        break;
       case 'edit':
         setBtnTxt('수정하러 가기');
+        setLink(`/${id}/update`);
         break;
       case 'log':
         setBtnTxt('로그로 가기');
+        setLink(`/${id}/logs`);
         break;
       case 'habit':
         setBtnTxt('오늘의 습관으로 가기');
+        setLink(`/${id}/habit`);
         break;
       case 'focus':
         setBtnTxt('오늘의 집중으로 가기');
+        setLink(`/${id}/focus`);
         break;
       default:
         break;
     }
   };
 
-  useEffect(() => {
-    setStudy(getStudyDetail(id));
-  }, []);
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (password !== crtPassword) {
+      // toast ui 튀어나오기
+
+      return;
+    }
+
+    navigate(link);
+  };
 
   return (
     <div className="wrapper">
@@ -57,45 +72,11 @@ const StudyDetailPage = () => {
       </div>
 
       <div className={styles.introWrapper}>
-        <div className={styles.titleContainer}>
-          <h1>연우의 개발공장</h1>
-          <div className={styles.btnContainer}>
-            <button
-              className={styles.linkBtn}
-              onClick={() => modalHandler('log')}
-            >
-              <p>로그</p>
-              <img src={icArrowRight} />
-            </button>
-            <button
-              className={styles.linkBtn}
-              onClick={() => modalHandler('habit')}
-            >
-              <p>오늘의 습관</p>
-              <img src={icArrowRight} />
-            </button>
-            <button
-              className={styles.linkBtn}
-              onClick={() => modalHandler('focus')}
-            >
-              <p>오늘의 집중</p>
-              <img src={icArrowRight} />
-            </button>
-          </div>
-        </div>
-
-        <div className={styles.descWrapper}>
-          <Description
-            descTitle={'소개'}
-            descContent={
-              'Slow And Steady Wins The Race! 다들 오늘 하루도 화이팅 :)'
-            }
-          />
-          <Description
-            descType={'point'}
-            descTitle={'현재까지 획득한 포인트'}
-          />
-        </div>
+        <StudyDetail
+          onClick={modalHandler}
+          setCrtPassword={setCrtPassword}
+          id={id}
+        />
       </div>
 
       <main className={styles.innerWrapper}>
@@ -114,10 +95,17 @@ const StudyDetailPage = () => {
             <label>비밀번호</label>
             <PasswordInput password={password} setPassword={setPassword} />
 
-            <Button btnTxt={btnTxt} btnStyle="btnDefault" btnType={'submit'} />
+            <Button
+              btnTxt={btnTxt}
+              btnStyle="btnDefault"
+              btnType={'submit'}
+              onClick={(e) => submitHandler(e)}
+            />
           </form>
         </PasswordModal>
       )}
+
+      {}
     </div>
   );
 };
