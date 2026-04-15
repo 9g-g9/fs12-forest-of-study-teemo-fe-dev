@@ -12,6 +12,7 @@ const TodayHabitPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newHabit, setNewHabit] = useState('');
   const [habits, setHabits] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { id } = useParams();
 
@@ -63,9 +64,11 @@ const TodayHabitPage = () => {
 
   // 습관 생성
   const createHabit = async () => {
-    if (!newHabit.trim()) return;
+    if (!newHabit.trim() || isSubmitting) return;
 
     try {
+      setIsSubmitting(true);
+
       const response = await fetch(`/api/habits/${id}`, {
         method: 'POST',
         headers: {
@@ -82,6 +85,8 @@ const TodayHabitPage = () => {
       fetchTodayHabits();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
