@@ -95,9 +95,11 @@ const StudyDetailPage = () => {
           title={'연우의 개발공장'}
         >
           <form>
-            <p>권한이 필요해요!</p>
-            <label>비밀번호</label>
-            <PasswordInput password={password} setPassword={setPassword} />
+            <p className={styles.formMessage}>권한이 필요해요!</p>
+            <div className={styles.formInputField}>
+              <label htmlFor="pw-id">비밀번호</label>
+              <PasswordInput password={password} setPassword={setPassword} />
+            </div>
 
             <Button
               btnTxt={btnTxt}
