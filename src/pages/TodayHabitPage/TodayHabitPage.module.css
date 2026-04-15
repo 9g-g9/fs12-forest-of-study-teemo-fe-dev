@@ -174,10 +174,10 @@
   }
   .habitList {
     gap: 12px;
-    height: 450px;
+    min-height: 450px;
   }
   .emptyMessage {
-    height: 474px;
+    min-height: 474px;
 
     font-size: 16px;
   }
