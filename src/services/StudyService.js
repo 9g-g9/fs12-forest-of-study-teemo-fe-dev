@@ -1,7 +1,7 @@
 const STUDY_API_URL = 'http://localhost:8080/api/studies';
 const RECENT_STUDY_LIST_KEY = 'recentStudyList';
 
-// N일째 진행 중 데이터 계산
+////////////////// N일째 진행 중 데이터 계산 //////////////////
 const getStudyProgressText = (createdAt) => {
   if (!createdAt) {
     return '';
@@ -12,7 +12,10 @@ const getStudyProgressText = (createdAt) => {
   const createdDate = new Date(`${createdDateText}T00:00:00`);
   const todayDate = new Date(`${todayDateText}T00:00:00`);
 
-  if (Number.isNaN(createdDate.getTime()) || Number.isNaN(todayDate.getTime())) {
+  if (
+    Number.isNaN(createdDate.getTime()) ||
+    Number.isNaN(todayDate.getTime())
+  ) {
     return '';
   }
 
@@ -22,7 +25,7 @@ const getStudyProgressText = (createdAt) => {
   return `${diffDays + 1}일째 진행 중`;
 };
 
-// 스터디 데이터 
+// 스터디 데이터
 const normalizeStudy = (study) => ({
   id: study.id,
   nickname: study.nickname ?? '',
@@ -38,33 +41,42 @@ const normalizeStudy = (study) => ({
   heartCount: study.heartCount ?? 0,
 });
 
-const extractStudyList = (payload) => {
-  if (Array.isArray(payload)) {
-    return payload;
+////////////////// 스터디 목록 불러오기 //////////////////
+export const getStudyList = async ({
+  page = 1,
+  pageSize = 6,
+  keyword = '',
+  orderBy = 'latest',
+} = {}) => {
+  const searchParams = new URLSearchParams({
+    page: String(page),
+    pageSize: String(pageSize),
+    orderBy,
+  });
+
+  if (keyword.trim()) {
+    searchParams.set('keyword', keyword.trim());
   }
 
-  if (Array.isArray(payload?.data)) {
-    return payload.data;
-  }
-
-  return [];
-};
-
-// 스터디 목록 불러오기
-export const getStudyList = async () => {
-  const response = await fetch(STUDY_API_URL);
+  const response = await fetch(`${STUDY_API_URL}?${searchParams.toString()}`);
 
   if (!response.ok) {
     throw new Error('스터디 목록을 불러오지 못했습니다.');
   }
 
-  const data = await response.json();
-  const studyList = extractStudyList(data);
+  const result = await response.json();
+  const studies = result?.data?.studies ?? [];
+  const pagination = result?.data?.pagination ?? null;
+  const filters = result?.data?.filters ?? null;
 
-  return studyList.map(normalizeStudy);
+  return {
+    studies: studies.map(normalizeStudy),
+    pagination,
+    filters,
+  };
 };
 
-// 로컬 스토리지 사용하여 최근 스터디 목록 불러오기
+////////////////// 로컬 스토리지 사용하여 최근 스터디 목록 불러오기 //////////////////
 export const getRecentStudyList = () => {
   const storedValue = localStorage.getItem(RECENT_STUDY_LIST_KEY);
 
@@ -82,7 +94,7 @@ export const getRecentStudyList = () => {
   }
 };
 
-//로컬스토리지에 최근 조회 목록 저장
+////////////////// 로컬스토리지에 최근 조회 목록 저장 //////////////////
 export const saveRecentStudy = (study) => {
   const recentStudyList = getRecentStudyList();
   const filteredStudyList = recentStudyList.filter(
