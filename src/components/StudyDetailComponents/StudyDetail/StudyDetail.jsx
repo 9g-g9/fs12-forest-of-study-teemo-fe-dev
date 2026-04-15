@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
+import LinkButton from '../../LinkButton/LinkButton';
 import Description from '../../../components/StudyDetailComponents/Description/Description';
+
+import { getStudyDetail } from '../../../services/StudyDetailService';
 
 import icArrowRight from '../../../assets/icons/ic_arrow_right.svg';
 
 import styles from './StudyDetail.module.css';
-
-import { getStudyDetail } from '../../../services/StudyDetailService';
 
 const StudyDetail = ({ onClick, setCrtPassword, id }) => {
   const [study, setStudy] = useState([]);
@@ -39,18 +39,21 @@ const StudyDetail = ({ onClick, setCrtPassword, id }) => {
           {study.nickname}의 {study.title}
         </h1>
         <div className={styles.btnContainer}>
-          <button className={styles.linkBtn} onClick={() => onClick('log')}>
-            <p>로그</p>
-            <img src={icArrowRight} />
-          </button>
-          <button className={styles.linkBtn} onClick={() => onClick('habit')}>
-            <p>오늘의 습관</p>
-            <img src={icArrowRight} />
-          </button>
-          <button className={styles.linkBtn} onClick={() => onClick('focus')}>
-            <p>오늘의 집중</p>
-            <img src={icArrowRight} />
-          </button>
+          <LinkButton
+            text="로그"
+            onClick={() => onClick('log')}
+            type={'button'}
+          />
+          <LinkButton
+            text="오늘의 습관"
+            onClick={() => onClick('habit')}
+            type={'button'}
+          />
+          <LinkButton
+            text="오늘의 집중"
+            onClick={() => onClick('focus')}
+            type={'button'}
+          />
         </div>
       </div>
 
