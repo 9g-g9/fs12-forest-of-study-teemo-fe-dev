@@ -13,14 +13,11 @@ export const createTimer = async (studyId) => {
   try {
     const response = await fetch(
       `http://localhost:8080/api/timers/${studyId}`,
-      { method: 'POST' },
+      { method: 'POST', headers: { 'Content-Type': 'application/json' } },
     );
     if (!response.ok) {
       throw new Error('데이터 응답에 실패했습니다');
     }
-    const { data } = await response.json();
-
-    return data.timer;
   } catch (error) {
     console.error(error);
   }
@@ -41,9 +38,62 @@ export const updateTargetDuration = async (studyId, targetDuration) => {
     if (!response.ok) {
       throw new Error('데이터 응답에 실패했습니다');
     }
-    // const { data } = await res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    // return data.timer;
+export const updateStart = async (studyId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/timers/${studyId}/start`,
+      { method: 'PATCH', headers: { 'Content-Type': 'application/json' } },
+    );
+    if (!response.ok) {
+      throw new Error('데이터 응답에 실패했습니다');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updatePause = async (studyId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/timers/${studyId}/pause`,
+      { method: 'PATCH', headers: { 'Content-Type': 'application/json' } },
+    );
+    if (!response.ok) {
+      throw new Error('데이터 응답에 실패했습니다');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateReset = async (studyId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/timers/${studyId}/reset`,
+      { method: 'PATCH', headers: { 'Content-Type': 'application/json' } },
+    );
+    if (!response.ok) {
+      throw new Error('데이터 응답에 실패했습니다');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateElapsedTime = async (studyId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/timers/${studyId}/elapsed-time`,
+      { method: 'PATCH', headers: { 'Content-Type': 'application/json' } },
+    );
+    if (!response.ok) {
+      throw new Error('데이터 응답에 실패했습니다');
+    }
   } catch (error) {
     console.error(error);
   }

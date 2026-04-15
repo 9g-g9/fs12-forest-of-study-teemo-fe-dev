@@ -8,6 +8,9 @@ import { useParams } from 'react-router-dom';
 import {
   createTimer,
   getTimer,
+  updatePause,
+  updateReset,
+  updateStart,
   updateTargetDuration,
 } from '../../services/TimerService';
 
@@ -29,20 +32,21 @@ const TodayFocus = () => {
 
   useEffect(() => {
     const fetchTimer = async () => {
-      const timer = await getTimer(Number(id));
+      const timer = await getTimer(id);
       if (!timer) {
-        const newTimer = await createTimer(Number(id));
-        setTargetDuration(newTimer.targetDuration);
+        setTargetDuration(1500000);
+        setTimerCount(1500000);
+        await createTimer(id);
         return;
       }
 
       setTargetDuration(timer.targetDuration);
-      if (timer.status === 'CANCELED') {
-        setTimerCount(targetDuration);
-      }
+      setTimerStatus(timer.status);
+      setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
     };
+
     fetchTimer();
-  }, [id, targetDuration]);
+  }, [id]);
 
   useEffect(() => {
     if (timerStatus === 'IN_PROGRESS') {
@@ -54,15 +58,11 @@ const TodayFocus = () => {
     return () => {
       clearInterval(timerRef.current);
     };
-  }, [timerStatus]);
-
-  const timerStartHandler = () => {
-    setTimerStatus('IN_PROGRESS');
-  };
+  }, [id, timerStatus]);
 
   // 폼 토글 핸들러 (클릭 시 수정 폼으로 변환)
   const toggleFormHandler = () => {
-    if (timerStatus !== 'IN_PROGRESS') {
+    if (timerStatus === 'CANCELED') {
       if (toggleForm === 'DEFAULT') {
         setHours(h);
         setMinutes(m);
@@ -136,10 +136,32 @@ const TodayFocus = () => {
       return;
     }
 
-    await updateTargetDuration(id, formattedMs);
     setTargetDuration(formattedMs);
+    setTimerCount(formattedMs);
     setToggleForm('DEFAULT');
     setError('');
+    await updateTargetDuration(id, formattedMs);
+  };
+
+  /*-----------------------------------------------------
+          타이머 조작 핸들러(시작, 일시정지, 리셋)
+  ------------------------------------------------------*/
+  const timerStartHandler = async () => {
+    setTimerStatus('IN_PROGRESS');
+    await updateStart(id);
+  };
+
+  const timerPauseHandler = async () => {
+    clearInterval(timerRef.current);
+    setTimerStatus('PAUSED');
+    await updatePause(id);
+  };
+
+  const timerResetHandler = async () => {
+    clearInterval(timerRef.current);
+    setTimerStatus('CANCELED');
+    setTimerCount(targetDuration);
+    await updateReset(id);
   };
 
   return (
@@ -172,7 +194,9 @@ const TodayFocus = () => {
             targetDuration={targetDuration}
             setTargetDuration={setTargetDuration}
             timerStatus={timerStatus}
-            onStartTimer={timerStartHandler}
+            onStart={timerStartHandler}
+            onPause={timerPauseHandler}
+            onReset={timerResetHandler}
           />
         </main>
       </div>
