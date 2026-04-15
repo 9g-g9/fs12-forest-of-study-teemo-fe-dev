@@ -26,26 +26,6 @@
   gap: 16px;
 }
 
-.time {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.timeTxt {
-  color: var(--gray_818181);
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.nowTime {
-  width: fit-content;
-  padding: 8px 12px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.3);
-}
-
 .mainSection {
   display: flex;
   flex-direction: column;
@@ -100,13 +80,13 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  height: 498px;
+  min-height: 498px;
 }
 
 .habitItem {
   display: flex;
   width: 100%;
-  height: 54px;
+  min-height: 54px;
   justify-content: center;
   align-items: center;
 
@@ -129,7 +109,7 @@
 .emptyMessage {
   display: flex;
   width: 100%;
-  height: 498px;
+  min-height: 498px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -174,10 +154,10 @@
   }
   .habitList {
     gap: 12px;
-    height: 450px;
+    min-height: 450px;
   }
   .emptyMessage {
-    height: 474px;
+    min-height: 474px;
 
     font-size: 16px;
   }
