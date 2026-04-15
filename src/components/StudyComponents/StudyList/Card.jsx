@@ -1,5 +1,5 @@
 import styles from './Card.module.css';
-import leafIcon from '../../../assets/icons/ic_leaf.svg';
+import TotalPoint from '../../TotalPoint/TotalPoint';
 
 const Card = ({ study }) => {
   return (
@@ -11,10 +11,8 @@ const Card = ({ study }) => {
             <h3 className={styles.cardTitle}>
               {study.nickname} 의 {study.title}
             </h3>
-            <p className={styles.cardPoint}>
-              <img src={leafIcon} alt="" className={styles.pointIcon} />
-              {study.rewardPoint}P 획득
-            </p>
+            {/* 획득 포인트 연결 */}
+            <TotalPoint id={study.id} theme="dark" />
           </div>
 
           <p className={styles.cardProgressText}>{study.progressText}</p>

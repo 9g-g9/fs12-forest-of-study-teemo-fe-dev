@@ -10,25 +10,34 @@ import img6 from '../../../assets/images/img6.png';
 import img7 from '../../../assets/images/img7.png';
 import img8 from '../../../assets/images/img8.png';
 
-const BackGround = ({ setBackground }) => {
-  const images = [img1, img2, img3, img4, img5, img6, img7, img8];
+const images = [
+  { id: 'green', src: img1 },
+  { id: 'yellow', src: img2 },
+  { id: 'blue', src: img3 },
+  { id: 'pink', src: img4 },
+  { id: 'bg5', src: img5 },
+  { id: 'bg6', src: img6 },
+  { id: 'bg7', src: img7 },
+  { id: 'bg8', src: img8 },
+];
 
+const BackGround = ({ setBackground }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleClick = (img) => {
-    setSelectedImage(img);
-    setBackground(img);
+    setSelectedImage(img.id);
+    setBackground(img.id);
   };
 
   return (
     <div className={styles.grid}>
-      {images.map((src, i) => (
+      {images.map((img) => (
         <div
-          key={i}
-          className={`${styles.card} ${selectedImage === src ? styles.active : ''}`}
-          onClick={() => handleClick(src)}
+          key={img.id}
+          className={`${styles.card} ${selectedImage === img.id ? styles.active : ''}`}
+          onClick={() => handleClick(img)}
         >
-          <img src={src} alt="" />
+          <img src={img.src} alt={img.id} />
         </div>
       ))}
     </div>

@@ -8,11 +8,13 @@ import PasswordCheck from '../../components/CreateComponents/PasswordCheck';
 import StudyName from '../../components/CreateComponents/StudyName';
 import Introduce from '../../components/CreateComponents/Introduce/Introduce';
 import Button from '../../components/Button/Button';
-import { useState } from 'react';
 import BackGround from '../../components/CreateComponents/BackGround/BackGround';
 import { createStudy } from '../../services/CreateService';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StudyCreate = () => {
+  const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
@@ -34,6 +36,8 @@ const StudyCreate = () => {
 
       console.log('성공:', res);
       alert('스터디 생성 완료!');
+
+      navigate(`/${res.id}/detail`);
     } catch (error) {
       console.error(error);
       alert('생성 실패');
