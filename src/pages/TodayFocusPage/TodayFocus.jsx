@@ -2,7 +2,7 @@ import styles from './TodayFocus.module.css';
 import { useEffect, useRef, useState } from 'react';
 import FocusHeader from '../../components/FocusComponents/FocusHeader';
 import TotalPoints from '../../components/FocusComponents/TotalPoints';
-import TargetTime from '../../components/FocusComponents/TargetTime';
+import TargetDuration from '../../components/FocusComponents/TargetDuration/TargetDuration';
 import Timer from '../../components/FocusComponents/Timer';
 import { useParams } from 'react-router-dom';
 import { upsertTimer } from '../../services/TimerService';
@@ -49,7 +49,14 @@ const TodayFocus = () => {
           <TotalPoints studyId={id} />
         </div>
         <main className={styles.timerWrapper}>
-          <TargetTime />
+          <div className={styles.timerHeader}>
+            <h2>오늘의 집중</h2>
+            <TargetDuration
+              targetDuration={targetDuration}
+              setTargetDuration={setTargetDuration}
+              timerStatus={timerStatus}
+            />
+          </div>
           <Timer
             timer={timer}
             targetDuration={targetDuration}
