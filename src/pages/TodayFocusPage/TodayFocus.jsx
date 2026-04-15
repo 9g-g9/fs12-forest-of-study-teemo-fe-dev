@@ -45,7 +45,7 @@ const TodayFocus = () => {
     <div className="wrapper">
       <div className={styles.focusWrapper}>
         <div>
-          <FocusHeader />
+          <FocusHeader studyId={id} />
           <TotalPoints studyId={id} />
         </div>
         <main className={styles.timerWrapper}>
