@@ -4,16 +4,19 @@ import LinkButton from '../../components/LinkButton/LinkButton';
 import HabitList from '../../components/HabitComponents/HabitList';
 import HabitListHeader from '../../components/HabitComponents/HabitListHeader';
 import { useParams } from 'react-router-dom';
+import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
 
 const TodayHabitPage = () => {
-  const [habits, setHabits] = useState([]);
   const [studyName, setStudyName] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newHabit, setNewHabit] = useState('');
+  const [habits, setHabits] = useState([]);
 
   const { id } = useParams();
 
   const fetchTodayHabits = async () => {
     try {
-      const response = await fetch(`/api/studies/${id}/habits/today`);
+      const response = await fetch(`/api/habits/${id}/today`);
       const result = await response.json();
 
       console.log(result);
@@ -28,7 +31,36 @@ const TodayHabitPage = () => {
   }, []);
 
   const onOpenModalHandler = () => {
-    console.log('모달 열기');
+    setIsModalOpen(true);
+  };
+
+  const onCloseModalHandler = () => {
+    setIsModalOpen(false);
+    setNewHabit('');
+  };
+
+  const createHabit = async () => {
+    if (!newHabit.trim()) return;
+
+    try {
+      const response = await fetch(`/api/habits/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: newHabit }),
+      });
+
+      const result = await response.json();
+
+      if (!result.success) return;
+
+      setNewHabit('');
+      onCloseModalHandler();
+      fetchTodayHabits();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -57,6 +89,14 @@ const TodayHabitPage = () => {
           </section>
         </div>
       </div>
+      {isModalOpen && (
+        <HabitConfirmModal
+          onClose={onCloseModalHandler}
+          onConfirm={createHabit}
+          newHabit={newHabit}
+          setNewHabit={setNewHabit}
+        />
+      )}
     </>
   );
 };
