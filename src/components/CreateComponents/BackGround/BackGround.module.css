@@ -10,7 +10,7 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 16px;
-  background: #eee;
+  background: var(--gray_EEEEEE);
 }
 
 .card img {
@@ -35,14 +35,14 @@
   transform: scale(0.98);
 }
 
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

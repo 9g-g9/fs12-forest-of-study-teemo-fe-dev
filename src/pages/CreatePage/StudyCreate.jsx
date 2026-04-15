@@ -10,12 +10,35 @@ import Introduce from '../../components/CreateComponents/Introduce/Introduce';
 import Button from '../../components/Button/Button';
 import { useState } from 'react';
 import BackGround from '../../components/CreateComponents/BackGround/BackGround';
+import { createStudy } from '../../services/CreateService';
 
 const StudyCreate = () => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [background, setBackground] = useState('');
+
+  const handleSubmit = async () => {
+    try {
+      const data = {
+        nickname,
+        title,
+        description,
+        background,
+        password,
+      };
+
+      const res = await createStudy(data);
+
+      console.log('성공:', res);
+      alert('스터디 생성 완료!');
+    } catch (error) {
+      console.error(error);
+      alert('생성 실패');
+    }
+  };
 
   return (
     <>
@@ -30,11 +53,14 @@ const StudyCreate = () => {
             <StudyName title={title} setTitle={setTitle} />
 
             <h3 className={styles.title}>소개</h3>
-            <Introduce />
+            <Introduce
+              description={description}
+              setDescription={setDescription}
+            />
 
             <div>
               <h3 className={styles.title}>배경을 선택해주세요</h3>
-              <BackGround />
+              <BackGround setBackground={setBackground} />
             </div>
           </div>
 
@@ -50,8 +76,8 @@ const StudyCreate = () => {
 
           <Button
             btnTxt="만들기"
-            onClick={() => {}}
-            btnType="submit"
+            onClick={handleSubmit}
+            btnType="button"
             btnStyle="btnCreate"
           />
         </div>
