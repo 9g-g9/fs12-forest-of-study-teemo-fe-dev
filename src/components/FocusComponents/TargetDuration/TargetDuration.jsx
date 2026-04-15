@@ -85,7 +85,7 @@ const TargetDuration = ({ targetDuration, setTargetDuration, timerStatus }) => {
       Number(seconds) * 1000;
 
     if (formattedMs < 600000) {
-      setError('최소 10분 이상으로 입력해주세요');
+      setError('10분 이상으로 입력해주세요');
       return;
     }
 
