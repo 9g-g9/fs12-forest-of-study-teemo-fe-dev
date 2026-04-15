@@ -1,0 +1,22 @@
+/* 이모지 */
+.emojiWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emojiContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.emojiAddBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 8px;
+}
