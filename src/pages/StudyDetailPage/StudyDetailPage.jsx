@@ -20,9 +20,11 @@ const StudyDetailPage = () => {
 
   const [btnTxt, setBtnTxt] = useState('수정하러 가기');
   const [link, setLink] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
   const [crtPassword, setCrtPassword] = useState('');
   const [password, setPassword] = useState('');
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isToast, setToast] = useState(false);
 
   // 수정을 눌렀는지 습관을 눌렀는지 로그를 눌렀는지 . . .
   const modalHandler = (type) => {
@@ -57,7 +59,9 @@ const StudyDetailPage = () => {
 
     if (password !== crtPassword) {
       // toast ui 튀어나오기
+      setToast(true);
 
+      setTimeout(() => setToast(false), 3000);
       return;
     }
 
@@ -105,7 +109,13 @@ const StudyDetailPage = () => {
         </PasswordModal>
       )}
 
-      {}
+      {isToast && (
+        <Toast
+          toastType="error"
+          toastMsg="비밀번호가 일치하지 않습니다. 다시 입력해주세요."
+          toastStyle="L"
+        />
+      )}
     </div>
   );
 };
