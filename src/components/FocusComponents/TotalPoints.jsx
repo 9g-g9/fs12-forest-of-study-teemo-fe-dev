@@ -1,11 +1,11 @@
 import styles from '../../pages/TodayFocusPage/TodayFocus.module.css';
 import TotalPoint from '../TotalPoint/TotalPoint';
 
-const TotalPoints = () => {
+const TotalPoints = ({ studyId }) => {
   return (
     <div className={styles.pointContainer}>
       <p>현재까지 획득한 포인트</p>
-      <TotalPoint size={'m'} />
+      <TotalPoint id={studyId} size={'m'} />
     </div>
   );
 };
