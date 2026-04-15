@@ -1,0 +1,22 @@
+/* 공유 수정 삭제 버튼 */
+
+.interContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.greenText {
+  color: var(--green_text_578246);
+}
+
+.grayText {
+  color: var(--gray_818181);
+}
+
+@media (max-width: 768px) {
+  .greenText,
+  .grayText {
+    font-size: 12px;
+  }
+}
