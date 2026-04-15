@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TodayHabitPage.module.css';
-import LinkButton from '../../components/LinkButton/LinkButton';
 import HabitList from '../../components/HabitComponents/HabitList';
 import HabitListHeader from '../../components/HabitComponents/HabitListHeader';
 import { useParams } from 'react-router-dom';
 import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModal';
+import CurrentTime from '../../components/CurrentTime/CurrentTime';
+import HabitHeader from '../../components/HabitComponents/HabitHeader';
 
 const TodayHabitPage = () => {
   const [studyName, setStudyName] = useState('');
@@ -14,12 +15,30 @@ const TodayHabitPage = () => {
 
   const { id } = useParams();
 
+  // 스터디명 조회
+  const fetchStudy = async () => {
+    try {
+      const response = await fetch('/api/studies');
+      const result = await response.json();
+
+      if (!result.success) return;
+
+      const currentStudy = result.data.find((study) => study.id === Number(id));
+
+      if (!currentStudy) return;
+
+      setStudyName(currentStudy.title);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 습관 조회
   const fetchTodayHabits = async () => {
     try {
       const response = await fetch(`/api/habits/${id}/today`);
       const result = await response.json();
 
-      console.log(result);
       setHabits(result.data);
     } catch (error) {
       console.error(error);
@@ -28,17 +47,21 @@ const TodayHabitPage = () => {
 
   useEffect(() => {
     fetchTodayHabits();
-  }, []);
+    fetchStudy();
+  }, [id]);
 
+  // 모달 열기
   const onOpenModalHandler = () => {
     setIsModalOpen(true);
   };
 
+  // 모달 닫기
   const onCloseModalHandler = () => {
     setIsModalOpen(false);
     setNewHabit('');
   };
 
+  // 습관 생성
   const createHabit = async () => {
     if (!newHabit.trim()) return;
 
@@ -55,7 +78,6 @@ const TodayHabitPage = () => {
 
       if (!result.success) return;
 
-      setNewHabit('');
       onCloseModalHandler();
       fetchTodayHabits();
     } catch (error) {
@@ -68,18 +90,8 @@ const TodayHabitPage = () => {
       <div className="wrapper">
         <div className={styles.bodyWrapper}>
           <section className={styles.header}>
-            <div className={styles.top}>
-              <h1 className={styles.title}>스터디명</h1>
-              <nav className={styles.navContainer}>
-                <LinkButton text="오늘의 집중" url="/:id/focus" />
-                <LinkButton text="로그" url="/:id/logs" />
-                <LinkButton text="홈" url="/:id/detail" />
-              </nav>
-            </div>
-            <div className={styles.time}>
-              <p className={styles.timeTxt}>현재 시간</p>
-              <div className={styles.nowTime}>시계</div>
-            </div>
+            <HabitHeader studyName={studyName} id={id} />
+            <CurrentTime />
           </section>
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
