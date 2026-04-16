@@ -1,20 +1,4 @@
-export const getStudyName = async (id) => {
-  const response = await fetch('http://localhost:8080/api/studies');
-  const result = await response.json();
-
-  if (!response.ok || !result.success) {
-    throw new Error(result.message || '스터디 조회를 실패했습니다.');
-  }
-
-  const currentStudy = result.data.find((study) => study.id === Number(id));
-
-  if (!currentStudy) {
-    throw new Error('스터디를 찾을 수 없습니다.');
-  }
-
-  return currentStudy.title;
-};
-
+// 습관 조회
 export const getTodayHabits = async (id) => {
   const response = await fetch(`http://localhost:8080/api/habits/${id}/today`);
   const result = await response.json();
@@ -26,6 +10,7 @@ export const getTodayHabits = async (id) => {
   return result.data;
 };
 
+// 습관 생성
 export const postHabit = async (id, name) => {
   const response = await fetch(`http://localhost:8080/api/habits/${id}`, {
     method: 'POST',
@@ -39,6 +24,24 @@ export const postHabit = async (id, name) => {
 
   if (!response.ok || !result.success) {
     throw new Error(result.message || '습관 생성을 실패했습니다.');
+  }
+
+  return result.data;
+};
+
+// 습관 토글
+export const toggleHabit = async (studyId, habitId) => {
+  const response = await fetch(
+    `http://localhost:8080/api/habits/${studyId}/${habitId}/today`,
+    {
+      method: 'PATCH',
+    },
+  );
+
+  const result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error(result.message || '습관 완료 상태 변경을 실패했습니다.');
   }
 
   return result.data;
