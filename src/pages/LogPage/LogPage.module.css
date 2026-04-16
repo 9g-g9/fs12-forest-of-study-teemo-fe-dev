@@ -36,6 +36,7 @@
   margin-top: 4px;
 }
 
+/* 집중 시간, 포인트 */
 .radioBox {
   display: flex;
   justify-content: end;
@@ -68,11 +69,25 @@
   border: none;
 }
 
+/* 날짜 이동 컨테이너 */
+.dateSelectorContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nowDate {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray_818181);
+}
+
 .totalBox {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-bottom: 30px;
+  margin: 30px;
   gap: 20px;
   font-size: 20px;
 }
@@ -83,13 +98,19 @@
   font-weight: 800;
 }
 
-.totalValue {
+.totalFocusValue {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--green_text_578246);
+  color: var(--red_F50E0E);
 }
 
+.totalPointValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue_text_418099);
+}
 
 .logWrapper {
   border-radius: 20px;
@@ -126,6 +147,11 @@
 .rowValue {
   color: var(--black_414141);
   font-size: 16px;
+}
+
+.noData {
+  padding: 100px;
+  color: var(--gray_818181);
 }
 
 @media (max-width: 1024px) {

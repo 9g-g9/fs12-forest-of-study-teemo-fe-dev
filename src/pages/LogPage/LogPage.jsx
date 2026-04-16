@@ -3,11 +3,13 @@ import styles from "./LogPage.module.css";
 import LinkButton from '../../components/LinkButton/LinkButton';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import { formattedTime } from '../../utils/formattedTime';
+import arrowLeft from '../../assets/icons/ic_arrow_left_big.svg';
+import arrowRight from '../../assets/icons/ic_arrow_right_big.svg';
 
 
 const Logs = () => {
-  const studyId = 1; // 임시값
-  
+  const studyId = 5;
+
   const [logType, setLogType] = useState("focus");
   const [date, setDate] = useState(new Date());
   const [pointLogs, setPointLogs] = useState([]);
@@ -28,30 +30,29 @@ const Logs = () => {
     return `${year}-${month}-${day}`;
   }
 
+  const prevDateHandler = () => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() - 1);
+    setDate(newDate);
+  }
+
+  const nextDateHandler = () => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + 1);
+    setDate(newDate);
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const formattedDate = formatDate(date);
-      try {
-        const pointRes = await fetch(`http://localhost:8080/api/logs/${studyId}/pointLogs?date=${formattedDate}`);
-        const focusRes = await fetch(`http://localhost:8080/api/logs/${studyId}/focusLogs?date=${formattedDate}`);
-        
-        if (!pointRes.ok || !focusRes.ok) {
-          throw new Error("API 호출 실패");
-        }
+        const res = await fetch(`http://localhost:8080/api/logs/${studyId}/pointLogs?date=${formattedDate}`);
+        const data = await res.json();
 
-        const pointData = await pointRes.json();
-        const focusData = await focusRes.json();
-
-        setPointLogs(pointData.data || []);
-        setFocusLogs(focusData.data || []);
-      } catch (error) {
-        console.error("데이터 로딩 실패:", error);
-        setPointLogs([]);
-        setFocusLogs([]);
-      }
-    } 
+        setPointLogs(data.data || []);
+        setFocusLogs(data.data || []);
+      } 
     fetchData();
-  }, [date])
+  }, [date]);
 
   const logList = logType === "point" ? pointLogs : focusLogs;
 
@@ -63,7 +64,9 @@ const Logs = () => {
       <div className={styles.topwrapper}>
         {/** 스터디이름, 링크 */}
         <div className={styles.top}>
-          <h1 className={styles.title}>연우의 개발공장</h1>
+          <h1 className={styles.title}>
+            연우의 개발공장
+          </h1>
           <div className={styles.linkContainer}>
             <LinkButton  
               className={styles.linkButton}
@@ -114,8 +117,22 @@ const Logs = () => {
 
       </div>
 
+      
+
 
       <div className={styles.logWrapper}>
+        <div className={styles.dateSelectorContainer}>
+          <button onClick={prevDateHandler}>
+            <img alt="이전 날짜" src={arrowLeft}/>
+          </button>
+          <span className={styles.nowDate}>
+            {formatDate(date)}
+          </span>
+          <button onClick={nextDateHandler}>
+            <img alt="다음 날짜" src={arrowRight}/>
+          </button>
+        </div>
+
         {/* 총합 */}
         <div className={styles.totalBox}>
           <h3 className={styles.logType}>
@@ -123,15 +140,15 @@ const Logs = () => {
           </h3>
 
           {logType === "point" ? (
-            <h3 className={styles.totalValue}>{totalPoints.toLocaleString()} P</h3>
-            
+            <h3 className={styles.totalPointValue}>
+              {totalPoints.toLocaleString()} P
+            </h3>
           ) : (
-            <h3 className={styles.totalValue}>
+            <h3 className={styles.totalFocusValue}>
               {formattedTime(totalFocus)}
             </h3>
           )}
-          
-          
+  
         </div>
 
       
@@ -146,19 +163,31 @@ const Logs = () => {
             >
               {logType === "point" ? (
                 <>
-                  <span className={styles.rowDate}>{item.createdAt}</span>
-                  <span className={styles.rowValue}>{item.points} P</span>
+                  <span className={styles.rowDate}>
+                    {item.createdAt}
+                  </span>
+                  <span className={styles.rowValue}>
+                    {item.points} P
+                  </span>
                 </>
               ) : (
                 <>
-                  <span className={styles.rowDate}>{item.createdAt}</span>
-                  <span className={styles.rowValue}>{formattedTime(item.focusDuration)}</span>
+                  <span className={styles.rowDate}>
+                    {item.createdAt}
+                  </span>
+                  <span className={styles.rowValue}>
+                    {formattedTime(item.focusDuration)}
+                  </span>
                 </>
               )}
             </div>
           ))
           ) : (
-            <div className={styles.noData}>기록이 없습니다.</div>
+            <>
+              <p className={styles.noData}>
+                불러올 기록이 없어요.
+              </p>
+            </>
           )}
         </div>
       </div>
