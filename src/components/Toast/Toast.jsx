@@ -11,8 +11,10 @@ const Toast = ({ toastType = 'success', toastMsg = '성공했습니다!' }) => {
   const toastClassName =
     toastType === 'success' ? 'toastSuccess' : 'toastError';
   return (
-    <div className={`${styles.toast} ${styles[toastClassName]}`}>
-      {toastType === 'success' ? <p>🎉 {toastMsg}</p> : <p>🚨 {toastMsg}</p>}
+    <div className={styles.toastContainer}>
+      <div className={`${styles.toast} ${styles[toastClassName]}`}>
+        {toastType === 'success' ? <p>🎉 {toastMsg}</p> : <p>🚨 {toastMsg}</p>}
+      </div>
     </div>
   );
 };

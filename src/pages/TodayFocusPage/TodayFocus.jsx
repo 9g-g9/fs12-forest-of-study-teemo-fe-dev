@@ -13,7 +13,7 @@ import {
   updateStart,
   updateTargetDuration,
 } from '../../services/TimerService';
-import ToastMessage from '../../components/FocusComponents/ToastMessage/ToastMessage';
+import Toast from '../../components/Toast/Toast';
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -230,7 +230,7 @@ const TodayFocus = () => {
           </main>
         </div>
       </div>
-      {toastShow ? <ToastMessage type={toastType} msg={toastMsg} /> : <></>}
+      {toastShow && <Toast toastType={toastType} toastMsg={toastMsg} />}
     </>
   );
 };
