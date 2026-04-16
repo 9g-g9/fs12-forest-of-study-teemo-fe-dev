@@ -14,8 +14,7 @@ const EmojiMore = ({ data }) => {
         className={styles.emojiMoreBtn}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <img src={plusIcon} alt="이모지 더보기" /> {data.slice(3).length}
-        ..
+        <img src={plusIcon} alt="이모지 더보기" /> {data.slice(3).length}..
       </button>
       {isOpen && (
         <div className={styles.emojiMoreBox}>

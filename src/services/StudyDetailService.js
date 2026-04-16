@@ -8,6 +8,31 @@ export const getStudyDetail = async (id) => {
   return data.data;
 };
 
+export const validatePassword = async (id, password) => {
+  const res = await fetch(`${STUDY_API_URL}/${id}/pw`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      password,
+    }),
+  });
+
+  const data = await res.json();
+
+  return data.data;
+};
+
+export const deleteStudy = async (id) => {
+  const res = await fetch(`${STUDY_API_URL}/${id}`, {
+    method: 'DELETE',
+  });
+  const data = res.json();
+
+  return data.data;
+};
+
 // emoji
 export const getEmojis = async (id) => {
   const res = await fetch(`${EMOJI_API_URL}/${id}`);

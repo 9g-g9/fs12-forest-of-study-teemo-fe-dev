@@ -14,6 +14,11 @@
   color: var(--gray_818181);
 }
 
+.toastMiddle {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .greenText,
   .grayText {
