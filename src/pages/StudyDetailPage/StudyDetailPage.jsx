@@ -136,7 +136,7 @@ const StudyDetailPage = () => {
       <main className={styles.innerWrapper}>
         <h2 className={styles.tableTitle}>습관 기록표</h2>
 
-        <HabitTable />
+        <HabitTable id={id} />
       </main>
 
       {isOpen && (

@@ -1,5 +1,6 @@
 const STUDY_API_URL = 'http://localhost:8080/api/studies';
 const EMOJI_API_URL = 'http://localhost:8080/api/emojis';
+const HABIT_API_URL = 'http://localhost:8080/api/habits';
 
 export const getStudyDetail = async (id) => {
   const res = await fetch(`${STUDY_API_URL}/${id}`);
@@ -65,4 +66,27 @@ export const updateEmojis = async (id, emojiId) => {
   const data = await res.json();
 
   return data.data;
+};
+
+export const getWeeklyHabits = async (id) => {
+  const res = await fetch(`${HABIT_API_URL}/${id}/weekly`);
+  const data = await res.json();
+
+  const habits = data.data.habits;
+
+  const weeklyHabits = habits.map((habit) => {
+    let isCompleted = [false, false, false, false, false, false, false];
+
+    const days = habit.records.forEach((record) => {
+      const date = new Date(record.date);
+      const day = date.getDay() - 1; // date 는 일요일 시작이라 1 빼줌
+
+      isCompleted[day] = record.isCompleted;
+      return;
+    });
+
+    return { title: habit.name, isCompleted };
+  });
+
+  return weeklyHabits;
 };
