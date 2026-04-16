@@ -35,7 +35,9 @@ const Logs = () => {
         const pointRes = await fetch(`http://localhost:8080/api/logs/${studyId}/pointLogs?date=${formattedDate}`);
         const focusRes = await fetch(`http://localhost:8080/api/logs/${studyId}/focusLogs?date=${formattedDate}`);
         
-        if (!pointRes.ok || !focusRes.ok) throw new Error("API 호출 실패");
+        if (!pointRes.ok || !focusRes.ok) {
+          throw new Error("API 호출 실패");
+        }
 
         const pointData = await pointRes.json();
         const focusData = await focusRes.json();
