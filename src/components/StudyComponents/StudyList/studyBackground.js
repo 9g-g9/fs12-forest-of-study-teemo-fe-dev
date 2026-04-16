@@ -19,6 +19,13 @@ const solidBackgroundColors = {
   pink: '#FDE0E9',
 };
 
+const solidNicknameColors = {
+  green: '#578246',
+  yellow: '#C28B16',
+  blue: '#4E7FA3',
+  pink: '#B76A84',
+};
+
 const imageBackgroundMap = {
   bg5,
   bg6,
@@ -38,4 +45,8 @@ export const getStudyBackgroundColor = (background) => {
 
 export const getStudyBackgroundImage = (background) => {
   return imageBackgroundMap[background] ?? null;
+};
+
+export const getStudyNicknameColor = (background) => {
+  return solidNicknameColors[background] ?? solidNicknameColors.green;
 };

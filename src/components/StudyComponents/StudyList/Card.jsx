@@ -3,6 +3,7 @@ import TotalPoint from '../../TotalPoint/TotalPoint';
 import {
   getStudyBackgroundColor,
   getStudyBackgroundImage,
+  getStudyNicknameColor,
   isImageBackground,
 } from './studyBackground';
 
@@ -21,7 +22,18 @@ const Card = ({ study }) => {
     ? styles.imageBackground
     : styles.solidBackground;
 
-  const cardClassName = `${styles.cardBackground} ${backgroundClassName}`;
+  // 배경에 따른 텍스트 색상 css 설정
+  const textThemeClassName = hasImageBackground
+    ? styles.lightTextTheme
+    : styles.darkTextTheme;
+
+  //배경에 따른 총 획득 포인트 테마 설정
+  const pointTheme = hasImageBackground ? 'dark' : undefined;
+  const nicknameStyle = hasImageBackground
+    ? undefined
+    : { color: getStudyNicknameColor(background) };
+
+  const cardClassName = `${styles.cardBackground} ${backgroundClassName} ${textThemeClassName}`;
 
   return (
     <article className={cardClassName} style={cardStyle}>
@@ -30,15 +42,20 @@ const Card = ({ study }) => {
         <div className={styles.titleDate}>
           <div className={styles.cardHeader}>
             <h3 className={styles.cardTitle}>
-              {study.nickname} 의 {study.title}
+              <span className={styles.nickname} style={nicknameStyle}>
+                {study.nickname}
+              </span>
+              의 {study.title}
             </h3>
             {/* 획득 포인트 연결 */}
-            <TotalPoint id={study.id} theme="dark" />
+            <TotalPoint id={study.id} theme={pointTheme} />
           </div>
 
+          {/* N일째 진행 중 */}
           <p className={styles.cardProgressText}>{study.progressText}</p>
         </div>
 
+        {/* 스터디 설명 */}
         <p className={styles.cardDescription}>{study.description}</p>
 
         {/* 이모지 */}
