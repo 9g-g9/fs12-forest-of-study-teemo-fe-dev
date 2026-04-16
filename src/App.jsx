@@ -10,6 +10,7 @@ import LogPage from './pages/LogPage/LogPage';
 import StudyDetailPage from './pages/StudyDetailPage/StudyDetailPage';
 import TodayHabitPage from './pages/TodayHabitPage/TodayHabitPage';
 import StudyCreate from './pages/CreatePage/StudyCreate';
+import StudyUpdate from './pages/UpdatePage/StudyUpdate';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path=":id/logs" element={<LogPage />} />
           <Route path=":id/detail" element={<StudyDetailPage />} />
           <Route path=":id/habit" element={<TodayHabitPage />} />
+          <Route path=":id/update" element={<StudyUpdate />} />
           <Route path="/create" element={<StudyCreate />} />
         </Route>
       </Routes>
