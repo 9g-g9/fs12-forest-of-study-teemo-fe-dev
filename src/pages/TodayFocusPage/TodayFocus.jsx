@@ -13,6 +13,7 @@ import {
   updateStart,
   updateTargetDuration,
 } from '../../services/TimerService';
+import ToastMessage from '../../components/FocusComponents/ToastMessage/ToastMessage';
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -28,6 +29,20 @@ const TodayFocus = () => {
   const [seconds, setSeconds] = useState(s);
   const [error, setError] = useState('');
   const [title, setTitle] = useState('');
+  const [toastShow, setToastShow] = useState(false);
+  const [toastType, setToastType] = useState('');
+  const [toastMsg, setToastMsg] = useState('');
+
+  // 타이머 토스트 메세지 함수
+  const setTimerToast = (type, points = 0) => {
+    setToastType(type);
+    setToastMsg(
+      type === 'error'
+        ? '집중이 중단되었습니다.'
+        : `${points}포인트를 획득했습니다!`,
+    );
+    setToastShow(true);
+  };
 
   const timerRef = useRef();
 
@@ -61,6 +76,14 @@ const TodayFocus = () => {
       clearInterval(timerRef.current);
     };
   }, [id, timerStatus]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setToastShow(false);
+      setToastType('');
+      setToastMsg('');
+    }, 3000);
+  }, [toastShow]);
 
   // 폼 토글 핸들러 (클릭 시 수정 폼으로 변환)
   const toggleFormHandler = () => {
@@ -155,54 +178,60 @@ const TodayFocus = () => {
 
   const timerPauseHandler = async () => {
     clearInterval(timerRef.current);
+    timerRef.current = null;
     setTimerStatus('PAUSED');
+    setTimerToast('error');
     await updatePause(id);
   };
 
   const timerResetHandler = async () => {
     clearInterval(timerRef.current);
+    timerRef.current = null;
     setTimerStatus('CANCELED');
     setTimerCount(targetDuration);
     await updateReset(id);
   };
 
   return (
-    <div className="wrapper">
-      <div className={styles.focusWrapper}>
-        <div>
-          <FocusHeader studyId={id} title={title} />
-          <TotalPoints studyId={id} />
-        </div>
-        <main className={styles.timerWrapper}>
-          <div className={styles.timerHeader}>
-            <h2>오늘의 집중</h2>
-            <TargetDuration
-              targetDuration={targetDuration}
-              toggleForm={toggleForm}
-              error={error}
-              setError={setError}
-              hours={hours}
-              minutes={minutes}
-              seconds={seconds}
-              onToggleForm={toggleFormHandler}
-              onChangeHours={hoursInputHandler}
-              onChangeMinutes={minutesInputHandler}
-              onChangeSeconds={secondsInputHandler}
-              onSubmitTarget={submitHandler}
-            />
+    <>
+      <div className="wrapper">
+        <div className={styles.focusWrapper}>
+          <div>
+            <FocusHeader studyId={id} title={title} />
+            <TotalPoints studyId={id} />
           </div>
-          <Timer
-            timer={timerCount}
-            targetDuration={targetDuration}
-            setTargetDuration={setTargetDuration}
-            timerStatus={timerStatus}
-            onStart={timerStartHandler}
-            onPause={timerPauseHandler}
-            onReset={timerResetHandler}
-          />
-        </main>
+          <main className={styles.timerWrapper}>
+            <div className={styles.timerHeader}>
+              <h2>오늘의 집중</h2>
+              <TargetDuration
+                targetDuration={targetDuration}
+                toggleForm={toggleForm}
+                error={error}
+                setError={setError}
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds}
+                onToggleForm={toggleFormHandler}
+                onChangeHours={hoursInputHandler}
+                onChangeMinutes={minutesInputHandler}
+                onChangeSeconds={secondsInputHandler}
+                onSubmitTarget={submitHandler}
+              />
+            </div>
+            <Timer
+              timer={timerCount}
+              targetDuration={targetDuration}
+              setTargetDuration={setTargetDuration}
+              timerStatus={timerStatus}
+              onStart={timerStartHandler}
+              onPause={timerPauseHandler}
+              onReset={timerResetHandler}
+            />
+          </main>
+        </div>
       </div>
-    </div>
+      {toastShow ? <ToastMessage type={toastType} msg={toastMsg} /> : <></>}
+    </>
   );
 };
 
