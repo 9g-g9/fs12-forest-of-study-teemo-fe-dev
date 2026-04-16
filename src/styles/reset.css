@@ -43,6 +43,7 @@ body {
     Cantarell,
     sans-serif;
   line-height: 1.5;
+  background-color: var(--bg_F6F4EF);
   color: var(--black_414141);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -88,4 +89,11 @@ select {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
 }
