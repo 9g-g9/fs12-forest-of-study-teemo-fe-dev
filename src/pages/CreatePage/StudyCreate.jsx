@@ -2,8 +2,8 @@ import React from 'react';
 import '../../styles/reset.css';
 import styles from './Create.module.css';
 
-import NicknameInput from '../../components/input/NicknameInput';
-import PasswordInput from '../../components/input/PasswordInput';
+import NicknameInput from '../../components/Input/NicknameInput';
+import PasswordInput from '../../components/Input/PasswordInput';
 import PasswordCheck from '../../components/CreateComponents/PasswordCheck';
 import StudyName from '../../components/CreateComponents/StudyName';
 import Introduce from './Introduce/Introduce';
