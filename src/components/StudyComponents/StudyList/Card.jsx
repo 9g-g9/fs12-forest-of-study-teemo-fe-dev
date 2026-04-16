@@ -1,9 +1,30 @@
 import styles from './Card.module.css';
 import TotalPoint from '../../TotalPoint/TotalPoint';
+import {
+  getStudyBackgroundColor,
+  getStudyBackgroundImage,
+  isImageBackground,
+} from './studyBackground';
 
 const Card = ({ study }) => {
+  // 카드 배경
+  const background = study.background;
+  const hasImageBackground = isImageBackground(background);
+
+  //단일색일 경우 색상값 / 이미지일 경우 경로
+  const cardStyle = hasImageBackground
+    ? { backgroundImage: `url(${getStudyBackgroundImage(background)})` }
+    : { backgroundColor: getStudyBackgroundColor(background) };
+
+  //css 모듈 클래스 명(오버레이)
+  const backgroundClassName = hasImageBackground
+    ? styles.imageBackground
+    : styles.solidBackground;
+
+  const cardClassName = `${styles.cardBackground} ${backgroundClassName}`;
+
   return (
-    <article className={styles.cardBackground}>
+    <article className={cardClassName} style={cardStyle}>
       <div className={styles.cardInner}>
         {/* 카드 타이틀 + 포인트 */}
         <div className={styles.titleDate}>
@@ -17,6 +38,7 @@ const Card = ({ study }) => {
 
           <p className={styles.cardProgressText}>{study.progressText}</p>
         </div>
+
         <p className={styles.cardDescription}>{study.description}</p>
 
         {/* 이모지 */}
