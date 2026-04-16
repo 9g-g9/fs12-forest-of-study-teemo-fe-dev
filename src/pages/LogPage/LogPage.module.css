@@ -38,8 +38,12 @@
 
 .radioBox {
   display: flex;
+  justify-content: end;
   align-items: end;
-  gap: 10px;
+  appearance: none;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .radioBox input { 
@@ -50,17 +54,18 @@
   display: flex;
   cursor: pointer;
   align-items: center;
-  height: 30px;
-  padding: 0 15px;
-  border-radius: 20px;
-  border: 2px solid var(--brand_99C08E);
-  background: var(--white_FFFFFF);
-  color: var(--green_text_578246);
+  padding: 6px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--gray_EEEEEE);
+  background: var(--gray_EEEEEE);
+  color: var(--gray_818181);
 }
 
-.radioBox {
-  justify-content: end;
-  appearance: none;
+.active {
+  background: var(--brand_99C08E);
+  border: 1px solid var(--brand_99C08E);
+  color: var(--white_FFFFFF);
+  border: none;
 }
 
 .totalBox {
@@ -74,6 +79,8 @@
 
 .logType {
   display: flex;
+  font-size: 24px;
+  font-weight: 800;
 }
 
 .totalValue {
@@ -85,9 +92,10 @@
 
 
 .logWrapper {
-  border-radius: 15px;
+  border-radius: 20px;
   border: 1px solid var(--gray_DDDDDD);
-  padding: 20px;
+  padding: 40px;
+  min-height: 600px;
 }
 
 .list {
@@ -100,17 +108,29 @@
 .row {
   display: flex;
   justify-content: space-between;
-  width: 500px;
+  align-items: center;
+  width: 400px;
+  height: 54px;
   padding: 10px 16px;
-  font-size: 13px;
   border-radius: 20px;
-  border: 1px solid var(--gray_EEEEEE);
+  border: 1px solid var(--green_E1EDDE);
   background: var(--white_FFFFFF);
-  color: var(--gray_818181);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.rowDate {
+  color: var(--gray_818181);
 }
 
 .rowValue {
-  color: var(--blue_text_418099);
+  color: var(--black_414141);
+  font-size: 16px;
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+
 }
