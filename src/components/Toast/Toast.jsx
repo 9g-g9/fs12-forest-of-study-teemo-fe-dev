@@ -5,22 +5,16 @@ import styles from './Toast.module.css';
 
     toastType = 'success' or 'error'
     toastMsg = toast에 들어갈 메시지 (예: 집중이 중단되었습니다.)
-    toastStyle = 'S' or 'L' (small or large)
 */
 
-const Toast = ({
-  toastType = 'success',
-  toastMsg = '성공했습니다!',
-  toastStyle = 'S',
-}) => {
+const Toast = ({ toastType = 'success', toastMsg = '성공했습니다!' }) => {
   const toastClassName =
     toastType === 'success' ? 'toastSuccess' : 'toastError';
-  const toastSize = toastStyle.toUpperCase() === 'S' ? 'toastS' : 'toastL';
   return (
-    <div
-      className={`${styles.toast} ${styles[toastClassName]} ${styles[toastSize]}`}
-    >
-      {toastType === 'success' ? <p>🎉 {toastMsg}</p> : <p>🚨 {toastMsg}</p>}
+    <div className={styles.toastContainer}>
+      <div className={`${styles.toast} ${styles[toastClassName]}`}>
+        {toastType === 'success' ? <p>🎉 {toastMsg}</p> : <p>🚨 {toastMsg}</p>}
+      </div>
     </div>
   );
 };
