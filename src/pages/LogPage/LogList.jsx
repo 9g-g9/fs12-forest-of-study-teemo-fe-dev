@@ -45,7 +45,6 @@ const LogList = ({ logType, pointLogs, focusLogs }) => {
             logList.map((item) => (
             <div
               key={item.id || item.createdAt}
-
               className={styles.row}
             >
               {logType === "point" ? (
@@ -72,7 +71,7 @@ const LogList = ({ logType, pointLogs, focusLogs }) => {
           ) : (
             <>
               <p className={styles.noData}>
-                불러올 기록이 없어요.
+                해당 날짜의 기록이 없어요.
               </p>
             </>
           )}
