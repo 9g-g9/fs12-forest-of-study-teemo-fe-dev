@@ -5,19 +5,44 @@
 }
 
 .cardBackground {
+  position: relative;
   display: flex;
   width: 100%;
-  min-height: 243px;
+  height: 243px;
   border-radius: 20px;
   border: 1px solid var(--card_black_opacity_10);
-  background: var(--green_E1EDDE);
+  background-color: var(--green_E1EDDE);
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.solidBackground {
+  background-size: 100% 100%;
+}
+
+.imageBackground {
+  background-size: cover;
+}
+
+.imageBackground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, #41414180 0%, #41414180 100%),
+    linear-gradient(0deg, #0000001a 0%, #0000001a 100%);
 }
 
 .cardInner {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: calc(100% - 60px);
+  height: calc(100% - 60px);
   flex-direction: column;
   align-items: stretch;
+  justify-content: space-between;
   margin: 30px 30px;
 }
 
@@ -38,7 +63,11 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cardPoint {
@@ -69,7 +98,10 @@
   font-size: 14px;
   font-style: normal;
   line-height: normal;
-  margin-bottom: 30px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cardDescription {
@@ -77,12 +109,17 @@
   font-size: 16px;
   font-style: normal;
   line-height: 24px; /* 150% */
-  margin-bottom: 54px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cardEmojiTagDiv {
   display: inline-flex;
   align-items: flex-start;
+  align-self: flex-start;
+  margin-top: auto;
   gap: 5px;
 }
 .cardEmojiTag {
