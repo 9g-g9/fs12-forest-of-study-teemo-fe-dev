@@ -86,6 +86,7 @@ const StudyDetailPage = () => {
     if (link === 'delete') {
       setIsOpen(false);
       setIsDeleteOpen(true);
+      setPassword('');
       return;
     }
 
@@ -141,7 +142,10 @@ const StudyDetailPage = () => {
 
       {isOpen && (
         <PasswordModal
-          onClose={() => setIsOpen(false)}
+          onClose={() => {
+            setIsOpen(false);
+            setPassword('');
+          }}
           title={'연우의 개발공장'}
         >
           <form>
