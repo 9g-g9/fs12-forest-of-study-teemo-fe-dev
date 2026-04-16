@@ -25,6 +25,7 @@ const PasswordInput = ({ password, setPassword }) => {
     <div className={`${styles.inputContainer} ${styles.passwordContainer}`}>
       <div className={styles.inputWrapper}>
         <input
+          id="pw-id"
           className={newpassword && error ? styles.inputError : styles.input}
           type={showPassword ? 'text' : 'password'}
           placeholder="비밀번호를 입력해 주세요"

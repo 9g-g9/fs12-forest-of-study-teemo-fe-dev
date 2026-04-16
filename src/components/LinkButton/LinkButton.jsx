@@ -9,14 +9,26 @@ import styles from './LinkButton.module.css';
   text = LinkButton 내부에 들어갈 text
   url = LinkButton 클릭 시, 이동할 url
 
+  type = navigate를 쓰는 button 인지 아닌지 ('button')
+  onClick = navigate로 링크 이동을 해야하는 경우
+
   (ex: <LinkButton text="오늘의 집중" url="/:id/focus" />)
 */
-const LinkButton = ({ text, url }) => {
+const LinkButton = ({ text, url, type, onClick }) => {
   return (
-    <Link to={url} className={styles.linkBtn}>
-      <p>{text}</p>
-      <img src={icArrowRight} />
-    </Link>
+    <>
+      {type === 'button' ? (
+        <button className={styles.linkBtn} onClick={onClick}>
+          <p>{text}</p>
+          <img src={icArrowRight} />
+        </button>
+      ) : (
+        <Link to={url} className={styles.linkBtn}>
+          <p>{text}</p>
+          <img src={icArrowRight} />
+        </Link>
+      )}
+    </>
   );
 };
 
