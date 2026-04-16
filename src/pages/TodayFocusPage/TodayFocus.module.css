@@ -5,17 +5,6 @@
   font-weight: 500;
 }
 
-.pointContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
-}
-.pointContainer > p {
-  font-size: 18px;
-  color: var(--gray_818181);
-}
-
 .timerWrapper {
   display: flex;
   flex-direction: column;

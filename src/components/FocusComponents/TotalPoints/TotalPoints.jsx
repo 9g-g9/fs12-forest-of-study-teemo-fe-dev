@@ -1,5 +1,5 @@
-import styles from '../../pages/TodayFocusPage/TodayFocus.module.css';
-import TotalPoint from '../TotalPoint/TotalPoint';
+import styles from './TotalPoints.module.css';
+import TotalPoint from '../../TotalPoint/TotalPoint';
 
 const TotalPoints = ({ studyId }) => {
   return (
