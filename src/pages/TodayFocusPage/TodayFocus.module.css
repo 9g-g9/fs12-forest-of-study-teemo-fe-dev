@@ -87,6 +87,10 @@
   color: var(--red_F50E0E);
 }
 
+.complete {
+  color: var(--gray_818181);
+}
+
 .timerControlContainer {
   display: flex;
   gap: 24px;
