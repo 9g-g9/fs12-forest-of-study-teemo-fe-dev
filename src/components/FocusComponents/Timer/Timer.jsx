@@ -1,9 +1,9 @@
-import styles from '../../pages/TodayFocusPage/TodayFocus.module.css';
-import icPlay from '../../assets/icons/ic_play.svg';
-import icPause from '../../assets/icons/ic_pause.svg';
-import icRestart from '../../assets/icons/ic_restart.svg';
-import icStop from '../../assets/icons/ic_stop.svg';
-import { formattedTime } from '../../utils/formattedTime';
+import styles from './Timer.module.css';
+import icPlay from '../../../assets/icons/ic_play.svg';
+import icPause from '../../../assets/icons/ic_pause.svg';
+import icRestart from '../../../assets/icons/ic_restart.svg';
+import icStop from '../../../assets/icons/ic_stop.svg';
+import { formattedTime } from '../../../utils/formattedTime';
 
 const Timer = ({
   timer,

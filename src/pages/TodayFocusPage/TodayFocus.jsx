@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import FocusHeader from '../../components/FocusComponents/FocusHeader';
 import TotalPoints from '../../components/FocusComponents/TotalPoints';
 import TargetDuration from '../../components/FocusComponents/TargetDuration/TargetDuration';
-import Timer from '../../components/FocusComponents/Timer';
+import Timer from '../../components/FocusComponents/Timer/Timer';
 import { useParams } from 'react-router-dom';
 import {
   createTimer,
