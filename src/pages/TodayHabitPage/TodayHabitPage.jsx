@@ -7,9 +7,9 @@ import HabitConfirmModal from '../../components/HabitComponents/HabitConfirmModa
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 import HabitHeader from '../../components/HabitComponents/HabitHeader';
 import {
-  getStudyName,
   getTodayHabits,
   postHabit,
+  toggleHabit,
 } from '../../services/HabitService';
 
 const TodayHabitPage = () => {
@@ -18,31 +18,44 @@ const TodayHabitPage = () => {
   const [newHabit, setNewHabit] = useState('');
   const [habits, setHabits] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [togglingId, setTogglingId] = useState(null);
 
   const { id } = useParams();
-
-  const fetchStudy = async () => {
-    try {
-      const title = await getStudyName(id);
-      setStudyName(title);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const fetchHabits = async () => {
     try {
       const data = await getTodayHabits(id);
-      setHabits(data);
+      setStudyName(data.studyTitle);
+      setHabits(data.habits);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchStudy();
     fetchHabits();
   }, [id]);
+
+  // 습관 토글
+  const onToggleHabitHandler = async (habitId) => {
+    if (togglingId === habitId) return;
+
+    try {
+      setTogglingId(habitId);
+
+      await toggleHabit(id, habitId);
+
+      setHabits((prevHabits) =>
+        prevHabits.map((h) =>
+          h.id === habitId ? { ...h, isCompleted: !h.isCompleted } : h,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTogglingId(null);
+    }
+  };
 
   // 모달 열기
   const onOpenModalHandler = () => {
@@ -83,7 +96,7 @@ const TodayHabitPage = () => {
           <section className={styles.mainSection}>
             <div className={styles.todayHabit}>
               <HabitListHeader onOpenModal={onOpenModalHandler} />
-              <HabitList habits={habits} />
+              <HabitList habits={habits} onToggleHabit={onToggleHabitHandler} />
             </div>
           </section>
         </div>

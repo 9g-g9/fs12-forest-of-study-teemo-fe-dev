@@ -58,6 +58,8 @@
   top: 50%;
   right: 16px;
   transform: translateY(-50%);
+
+  cursor: pointer;
 }
 
 .input,

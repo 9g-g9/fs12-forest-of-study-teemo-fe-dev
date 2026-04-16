@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../pages/TodayHabitPage/TodayHabitPage.module.css';
 
-const HabitList = ({ habits }) => {
+const HabitList = ({ habits, onToggleHabit }) => {
   return (
     <>
       <div className={styles.habitList}>
@@ -14,6 +14,7 @@ const HabitList = ({ habits }) => {
           habits.map((h) => (
             <div
               key={h.id}
+              onClick={() => onToggleHabit(h.id)}
               className={`${styles.habitItem} ${h.isCompleted ? styles.completed : styles.notComplete}`}
             >
               {h.name}
