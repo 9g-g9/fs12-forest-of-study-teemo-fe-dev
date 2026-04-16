@@ -44,7 +44,7 @@
 
   position: absolute;
   top: 40px;
-  left: -10px;
+  left: -20px;
 
   padding: 12px;
 
@@ -52,4 +52,14 @@
   border: 1px solid var(--gray-gray_DDDDDD, #ddd);
   background: #fff;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+}
+
+.emojiPickerWrapper {
+  position: relative;
+}
+
+.emojiPickerBox {
+  position: absolute;
+  top: 40px;
+  left: 0px;
 }

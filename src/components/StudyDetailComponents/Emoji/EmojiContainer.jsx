@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import EmojiPicker from 'emoji-picker-react';
 
 import Emoji from '../../../components/Emoji/Emoji';
 import styles from './EmojiContainer.module.css';
 
-import { getEmojis } from '../../../services/StudyDetailService';
+import {
+  getEmojis,
+  createEmojis,
+  updateEmojis,
+} from '../../../services/StudyDetailService';
 
 import smileIcon from '../../../assets/icons/ic_smile.svg';
 import plusIcon from '../../../assets/icons/ic_plus.svg';
@@ -12,26 +17,47 @@ import plusIcon from '../../../assets/icons/ic_plus.svg';
 const EmojiContainer = () => {
   const { id } = useParams();
   const [isMore, setIsMore] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [emojis, setEmojis] = useState([]);
-  const [moreEmojis, setMoreEmojis] = useState([]);
 
   const fetchEmojis = async () => {
     try {
       const data = await getEmojis(id);
 
+      setEmojis(data);
+
       if (data.length <= 3) {
         setIsMore(false);
-        setEmojis(data);
         return;
       }
 
       setIsMore(true);
-      setEmojis(data.slice(0, 3));
-      setMoreEmojis(data.slice(3));
     } catch (error) {
       console.log(error);
       throw error;
+    }
+  };
+
+  const emojiHandle = async (e) => {
+    // emoji 가 현재 emoji 안에 있는 지 확인
+    // 있으면 patch 로 넘기고
+    // 없으면 create 로 넘기자!
+
+    const selectEmoji = emojis.find((emoji) => emoji.emoji === e.emoji);
+
+    if (!selectEmoji) {
+      //create
+      const newEmoji = await createEmojis(id, e.emoji);
+
+      setEmojis((prev) => [...prev, newEmoji]);
+    } else {
+      //update emoji id 같이
+      const updateEmoji = await updateEmojis(id, selectEmoji.id);
+
+      setEmojis((prev) =>
+        prev.map((p) => (p.emoji !== updateEmoji.emoji ? p : updateEmoji)),
+      );
     }
   };
 
@@ -41,7 +67,7 @@ const EmojiContainer = () => {
 
   return (
     <div className={styles.emojiWrapper}>
-      {emojis.map((emoji, i) => (
+      {emojis.slice(0, 3).map((emoji, i) => (
         <Emoji
           key={`emoji-${i}`}
           type={'big'}
@@ -53,13 +79,14 @@ const EmojiContainer = () => {
         <div>
           <button
             className={styles.emojiMoreBtn}
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsMoreOpen(!isMoreOpen)}
           >
-            <img src={plusIcon} alt="이모지 더보기" /> {moreEmojis.length}..
+            <img src={plusIcon} alt="이모지 더보기" /> {emojis.slice(3).length}
+            ..
           </button>
-          {isOpen && (
+          {isMoreOpen && (
             <div className={styles.emojiMoreBox}>
-              {moreEmojis.map((emoji, i) => (
+              {emojis.slice(3).map((emoji, i) => (
                 <Emoji
                   type={'big'}
                   key={`emoji-${i}`}
@@ -71,10 +98,21 @@ const EmojiContainer = () => {
           )}
         </div>
       )}
-      <button className={styles.emojiAddBtn}>
-        <img src={smileIcon} alt="이모지 추가 버튼" />
-        <span>추가</span>
-      </button>
+
+      <div className={styles.emojiPickerWrapper}>
+        <button
+          className={styles.emojiAddBtn}
+          onClick={() => setIsPickerOpen(!isPickerOpen)}
+        >
+          <img src={smileIcon} alt="이모지 추가 버튼" />
+          <span>추가</span>
+        </button>
+        {isPickerOpen && (
+          <div className={styles.emojiPickerBox}>
+            <EmojiPicker onEmojiClick={(e) => emojiHandle(e)} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
