@@ -1,0 +1,52 @@
+import { useState } from 'react';
+import EmojiPicker from 'emoji-picker-react';
+
+import {
+  createEmojis,
+  updateEmojis,
+} from '../../../../../services/StudyDetailService';
+
+import styles from '../../EmojiContainer.module.css';
+import smileIcon from '../../../../../assets/icons/ic_smile.svg';
+
+const EmojiAdd = ({ emojis, setEmojis, id }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const emojiHandle = async (e) => {
+    // emoji 가 현재 emoji 안에 있는 지 확인
+    // 있으면 patch 로 넘기고
+    // 없으면 create 로 넘기자!
+
+    const selectEmoji = emojis.find((emoji) => emoji.emoji === e.emoji);
+
+    if (!selectEmoji) {
+      //create
+      const newEmoji = await createEmojis(id, e.emoji);
+
+      setEmojis((prev) => [...prev, newEmoji]);
+    } else {
+      //update emoji id 같이
+      const updateEmoji = await updateEmojis(id, selectEmoji.id);
+
+      setEmojis((prev) =>
+        prev.map((p) => (p.emoji !== updateEmoji.emoji ? p : updateEmoji)),
+      );
+    }
+  };
+
+  return (
+    <div className={styles.emojiPickerWrapper}>
+      <button className={styles.emojiAddBtn} onClick={() => setIsOpen(!isOpen)}>
+        <img src={smileIcon} alt="이모지 추가 버튼" />
+        <span>추가</span>
+      </button>
+      {isOpen && (
+        <div className={styles.emojiPickerBox}>
+          <EmojiPicker onEmojiClick={(e) => emojiHandle(e)} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default EmojiAdd;
