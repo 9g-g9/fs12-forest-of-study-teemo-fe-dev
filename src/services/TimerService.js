@@ -3,7 +3,7 @@ export const getTimer = async (studyId) => {
     const response = await fetch(`http://localhost:8080/api/timers/${studyId}`);
     const { data } = await response.json();
 
-    return data.timer;
+    return data;
   } catch (error) {
     console.error(error);
   }

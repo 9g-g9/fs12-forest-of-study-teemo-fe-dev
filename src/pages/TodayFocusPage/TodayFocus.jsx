@@ -27,22 +27,24 @@ const TodayFocus = () => {
   const [minutes, setMinutes] = useState(m);
   const [seconds, setSeconds] = useState(s);
   const [error, setError] = useState('');
+  const [title, setTitle] = useState('');
 
   const timerRef = useRef();
 
   useEffect(() => {
     const fetchTimer = async () => {
-      const timer = await getTimer(id);
-      if (!timer) {
+      const data = await getTimer(id);
+      if (!data.timer) {
         setTargetDuration(1500000);
         setTimerCount(1500000);
         await createTimer(id);
         return;
       }
 
-      setTargetDuration(timer.targetDuration);
-      setTimerStatus(timer.status);
-      setTimerCount(timer.targetDuration - timer.elapsedTime + 700);
+      setTitle(data.title);
+      setTargetDuration(data.timer.targetDuration);
+      setTimerStatus(data.timer.status);
+      setTimerCount(data.timer.targetDuration - data.timer.elapsedTime + 700);
     };
 
     fetchTimer();
@@ -168,7 +170,7 @@ const TodayFocus = () => {
     <div className="wrapper">
       <div className={styles.focusWrapper}>
         <div>
-          <FocusHeader studyId={id} />
+          <FocusHeader studyId={id} title={title} />
           <TotalPoints studyId={id} />
         </div>
         <main className={styles.timerWrapper}>
