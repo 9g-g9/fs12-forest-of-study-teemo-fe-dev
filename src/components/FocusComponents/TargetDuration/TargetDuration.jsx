@@ -1,110 +1,32 @@
 import styles from './TargetDuration.module.css';
 import { formattedTime } from '../../../utils/formattedTime';
 import icTimer from '../../../assets/icons/ic_timer.svg';
-import { useState } from 'react';
 
-const TargetDuration = ({ targetDuration, setTargetDuration, timerStatus }) => {
-  const h = Math.floor((targetDuration / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((targetDuration / (1000 * 60)) % 60);
-  const s = Math.floor((targetDuration / 1000) % 60);
-  const [toggleForm, setToggleForm] = useState('DEFAULT');
-  const [hours, setHours] = useState(h);
-  const [minutes, setMinutes] = useState(m);
-  const [seconds, setSeconds] = useState(s);
-  const [error, setError] = useState('');
-
-  // 폼 토글 핸들러 (클릭 시 수정 폼으로 변환)
-  const toggleFormHandler = () => {
-    if (timerStatus !== 'IN_PROGRESS') {
-      if (toggleForm === 'DEFAULT') {
-        setHours(h);
-        setMinutes(m);
-        setSeconds(s);
-        setToggleForm('FORM');
-      } else {
-        setToggleForm('DEFAULT');
-      }
-    }
-  };
-
-  /*---------------------------
-          input 핸들러
-    -------------------------*/
-  const hoursInputHandler = (e) => {
-    const newHours = e.target.value;
-    if (isNaN(newHours)) {
-      setError('숫자를 입력해주세요');
-    } else if (newHours >= 24) {
-      setError('23시 이하로 입력해주세요');
-    } else {
-      setHours(newHours);
-      setError('');
-    }
-  };
-
-  const minutesInputHandler = (e) => {
-    const newMinutes = e.target.value;
-    if (isNaN(newMinutes)) {
-      setError('숫자를 입력해주세요');
-    } else if (newMinutes >= 60) {
-      setError('59분 이하로 입력해주세요');
-    } else {
-      setMinutes(newMinutes);
-      setError('');
-    }
-  };
-
-  const secondsInputHandler = (e) => {
-    const newSeconds = e.target.value;
-    if (isNaN(newSeconds)) {
-      setError('숫자를 입력해주세요');
-    } else if (newSeconds >= 60) {
-      setError('59초 이하로 입력해주세요');
-    } else {
-      setSeconds(newSeconds);
-      setError('');
-    }
-  };
-
-  // 목표 시간 설정 핸들러
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (!hours) {
-      setHours(0);
-    }
-    if (!minutes) {
-      setMinutes(0);
-    }
-    if (!seconds) {
-      setSeconds(0);
-    }
-
-    const formattedMs =
-      Number(hours) * 1000 * 60 * 60 +
-      Number(minutes) * 1000 * 60 +
-      Number(seconds) * 1000;
-
-    if (formattedMs < 600000) {
-      setError('10분 이상으로 입력해주세요');
-      return;
-    }
-
-    setTargetDuration(formattedMs);
-    setToggleForm('DEFAULT');
-    setError('');
-  };
-
+const TargetDuration = ({
+  targetDuration,
+  toggleForm,
+  error,
+  setError,
+  hours,
+  minutes,
+  seconds,
+  onToggleForm,
+  onChangeHours,
+  onChangeMinutes,
+  onChangeSeconds,
+  onSubmitTarget,
+}) => {
   return (
     <>
       {toggleForm === 'DEFAULT' ? (
-        <button onClick={toggleFormHandler} className={styles.targetBtn}>
+        <button onClick={onToggleForm} className={styles.targetBtn}>
           <img src={icTimer} />
           <p>{formattedTime(targetDuration)}</p>
         </button>
       ) : (
         <form
           className={styles.targetDurationContainer}
-          onSubmit={submitHandler}
+          onSubmit={onSubmitTarget}
         >
           {error !== '' && <span className={styles.error}>{error}</span>}
           <div className={styles.inputContainer}>
@@ -112,7 +34,7 @@ const TargetDuration = ({ targetDuration, setTargetDuration, timerStatus }) => {
               type="text"
               maxLength="2"
               value={hours}
-              onChange={hoursInputHandler}
+              onChange={onChangeHours}
               onBlur={() => setError('')}
             />
             <p>시</p>
@@ -120,7 +42,7 @@ const TargetDuration = ({ targetDuration, setTargetDuration, timerStatus }) => {
               type="text"
               maxLength="2"
               value={minutes}
-              onChange={minutesInputHandler}
+              onChange={onChangeMinutes}
               onBlur={() => setError('')}
             />
             <p>분</p>
@@ -128,7 +50,7 @@ const TargetDuration = ({ targetDuration, setTargetDuration, timerStatus }) => {
               type="text"
               maxLength="2"
               value={seconds}
-              onChange={secondsInputHandler}
+              onChange={onChangeSeconds}
               onBlur={() => setError('')}
             />
             <p>초</p>
@@ -140,7 +62,7 @@ const TargetDuration = ({ targetDuration, setTargetDuration, timerStatus }) => {
             <button
               type="button"
               className={styles.targetDurationBtn}
-              onClick={toggleFormHandler}
+              onClick={onToggleForm}
             >
               취소
             </button>
