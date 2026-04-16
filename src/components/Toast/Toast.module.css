@@ -3,21 +3,13 @@
   align-items: center;
   justify-content: center;
 
-  height: 47px;
+  width: fit-content;
   border-radius: 12px;
   font-weight: 500;
 
   padding: 14px 28px;
 
   margin: 0 auto;
-}
-
-.toastS {
-  width: 223px;
-}
-
-.toastL {
-  width: 400px;
 }
 
 .toastSuccess {
@@ -32,15 +24,7 @@
 
 @media (max-width: 768px) {
   .toast {
-    height: 45px;
+    padding: 10px 18px;
     font-size: 14px;
-  }
-
-  .toastS {
-    width: 202px;
-  }
-
-  .toastL {
-    width: 370px;
   }
 }
