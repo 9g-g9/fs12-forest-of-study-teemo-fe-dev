@@ -13,14 +13,21 @@
   gap: 6px;
 }
 
-.emojiAddBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 6px 8px;
+.emojiMoreBox {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+
+  position: absolute;
+  top: 40px;
+  left: -20px;
+
+  padding: 12px;
+
+  border-radius: 15px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
 }
 
 .emojiMoreBtn {
@@ -37,19 +44,26 @@
   color: #fff;
 }
 
-.emojiMoreBox {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+.emojiMoreBtn:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
 
+.emojiAddBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 8px;
+}
+
+.emojiPickerWrapper {
+  position: relative;
+}
+
+.emojiPickerBox {
   position: absolute;
   top: 40px;
-  left: -10px;
-
-  padding: 12px;
-
-  border-radius: 15px;
-  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+  left: 0px;
 }
