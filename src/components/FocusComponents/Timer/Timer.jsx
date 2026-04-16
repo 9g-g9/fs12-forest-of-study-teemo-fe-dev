@@ -7,6 +7,7 @@ import { formattedTime } from '../../../utils/formattedTime';
 
 const Timer = ({
   timer,
+  toggleForm,
   timerStatus,
   onStart,
   onPause,
@@ -46,7 +47,7 @@ const Timer = ({
             <button
               className={styles.startBtn}
               onClick={onStart}
-              disabled={timerStatus === 'IN_PROGRESS'}
+              disabled={timerStatus === 'IN_PROGRESS' || toggleForm === 'FORM'}
             >
               <img src={icPlay} />
               Start!
