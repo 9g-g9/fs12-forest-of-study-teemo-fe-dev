@@ -183,10 +183,10 @@ const TodayFocus = () => {
       Number(minutes) * 1000 * 60 +
       Number(seconds) * 1000;
 
-    if (formattedMs < 600000) {
-      setError('10분 이상으로 입력해주세요');
-      return;
-    }
+    // if (formattedMs < 600000) {
+    //   setError('10분 이상으로 입력해주세요');
+    //   return;
+    // }
 
     setTargetDuration(formattedMs);
     setTimerCount(formattedMs);
