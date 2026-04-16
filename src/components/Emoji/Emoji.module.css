@@ -2,36 +2,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
+
+  height: 31px;
   padding: 6px 8px;
+
   border-radius: 50px;
   background: rgba(0, 0, 0, 0.5);
   color: var(--white_FFFFFF);
 }
 
-.symbol {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  line-height: 1;
-}
-
-.count {
-  font-size: 16px;
-  line-height: 1;
-}
-
-@media (max-width: 768px) {
-  .item {
-    padding: 4px 8px;
-  }
-
-  .symbol {
-    font-size: 18px;
-  }
-
-  .count {
-    font-size: 16px;
-  }
+.small {
+  font-size: 12px;
 }
