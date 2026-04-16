@@ -104,26 +104,20 @@
   font-weight: 800;
 }
 
-.startBtn:hover {
-  background: var(--green_text_578246);
-}
-
-.startBtn:disabled {
-  background: var(--gray_818181);
-}
-
 .ctrlBtn {
   padding: 14px;
   background: var(--brand_99C08E);
   border-radius: 50%;
 }
 
+.startBtn:hover,
 .ctrlBtn:hover {
   background: var(--green_text_578246);
 }
 
-.ctrlBtn:active {
-  background: var(--green_text_578246);
+.startBtn:disabled,
+.ctrlBtn:disabled {
+  background: var(--gray_818181);
 }
 
 /* 태블릿 */
