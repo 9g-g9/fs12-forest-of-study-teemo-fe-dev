@@ -16,33 +16,6 @@ const HabitTable = ({ id }) => {
     fetchData();
   }, []);
 
-  // const datas = [
-  //   {
-  //     title: '미라클모닝 6시 기상',
-  //     isCompleted: [true, true, false, true, false, false, false],
-  //   },
-  //   {
-  //     title: '아침 챙겨 먹기',
-  //     isCompleted: [true, true, false, true, false, false, true],
-  //   },
-  //   {
-  //     title: 'React 스터디 책 1챕터 읽기',
-  //     isCompleted: [false, true, false, true, false, true, false],
-  //   },
-  //   {
-  //     title: '스트레칭',
-  //     isCompleted: [true, true, false, false, true, false, false],
-  //   },
-  //   {
-  //     title: '사이드 프로젝트',
-  //     isCompleted: [false, true, false, true, false, false, true],
-  //   },
-  //   {
-  //     title: '물 2L 마시기',
-  //     isCompleted: [false, true, false, true, false, false, true],
-  //   },
-  // ];
-
   return (
     <>
       {habits.length === 0 ? (
