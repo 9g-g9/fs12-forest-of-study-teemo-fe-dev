@@ -1,6 +1,6 @@
 import styles from './TargetDuration.module.css';
-import { formattedTime } from '../../../utils/formattedTime';
-import icTimer from '../../../assets/icons/ic_timer.svg';
+import { formattedTime } from '../../../../utils/formattedTime';
+import icTimer from '../../../../assets/icons/ic_timer.svg';
 
 const TargetDuration = ({
   targetDuration,

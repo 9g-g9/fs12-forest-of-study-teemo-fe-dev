@@ -1,9 +1,9 @@
 import styles from './TodayFocus.module.css';
 import { useEffect, useRef, useState } from 'react';
-import FocusHeader from '../../components/FocusComponents/FocusHeader/FocusHeader';
-import TotalPoints from '../../components/FocusComponents/TotalPoints/TotalPoints';
-import TargetDuration from '../../components/FocusComponents/TargetDuration/TargetDuration';
-import Timer from '../../components/FocusComponents/Timer/Timer';
+import FocusHeader from './FocusComponents/FocusHeader/FocusHeader';
+import TotalPoints from './FocusComponents/TotalPoints/TotalPoints';
+import TargetDuration from './FocusComponents/TargetDuration/TargetDuration';
+import Timer from './FocusComponents/Timer/Timer';
 import { useParams } from 'react-router-dom';
 import {
   createTimer,
