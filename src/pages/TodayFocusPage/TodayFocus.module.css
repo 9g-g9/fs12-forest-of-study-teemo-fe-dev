@@ -5,55 +5,6 @@
   font-weight: 500;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navContainer {
-  display: flex;
-  gap: 16px;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 12px 16px 12px 24px;
-  border-radius: 15px;
-  border: 1px solid var(--gray_DDDDDD);
-  background: var(--white_FFFFFF);
-  color: var(--gray_818181);
-  font-weight: 500;
-}
-
-.pointContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
-}
-.pointContainer > p {
-  font-size: 18px;
-  color: var(--gray_818181);
-}
-
-.point {
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  padding: 8px 12px;
-  gap: 4px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.3);
-}
-.point > img {
-  width: 19px;
-  height: 19px;
-}
-
 .timerWrapper {
   display: flex;
   flex-direction: column;
@@ -72,54 +23,6 @@
   gap: 24px;
 }
 
-.timerContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 100px;
-}
-.timerContainer > h3 {
-  font-size: 120px;
-  font-weight: 800;
-}
-
-.inProgress {
-  color: var(--red_F50E0E);
-}
-
-.timerControlContainer {
-  display: flex;
-  gap: 24px;
-}
-
-.startBtn {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border-radius: 50px;
-  background: var(--brand_99C08E);
-  padding: 8px 105px 8px 78px;
-  color: var(--white_FFFFFF);
-  font-size: 28px;
-  font-weight: 800;
-}
-
-.ctrlBtn {
-  padding: 14px;
-  background: var(--brand_99C08E);
-  border-radius: 50%;
-}
-
-.startBtn:hover,
-.ctrlBtn:hover {
-  background: var(--green_text_578246);
-}
-
-.startBtn:disabled,
-.ctrlBtn:disabled {
-  background: var(--gray_818181);
-}
-
 /* 태블릿 */
 @media (max-width: 1024px) {
   .focusWrapper {
@@ -133,24 +36,6 @@
     gap: 24px;
   }
 
-  .header {
-    flex-direction: column;
-    align-items: start;
-    gap: 16px;
-  }
-
-  .title {
-    font-size: 24px;
-  }
-
-  .navContainer {
-    gap: 8px;
-  }
-
-  .nav {
-    padding: 8px 6px 8px 10px;
-  }
-
   .timerWrapper {
     padding: 24px 16px;
     gap: 17px;
@@ -158,35 +43,5 @@
 
   .timerHeader {
     gap: 16px;
-  }
-
-  .timerContainer {
-    gap: 64px;
-  }
-
-  .timerContainer > h3 {
-    font-size: 80px;
-  }
-
-  .timerControlContainer {
-    gap: 8px;
-  }
-
-  .startBtn {
-    gap: 8px;
-    padding: 11px 28px 11px 20px;
-    font-size: 18px;
-  }
-  .startBtn > img {
-    width: 24px;
-    height: 24px;
-  }
-
-  .ctrlBtn {
-    padding: 11px;
-  }
-  .ctrlBtn > img {
-    width: 26.4px;
-    height: 26.4px;
   }
 }

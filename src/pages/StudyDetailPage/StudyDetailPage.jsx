@@ -4,6 +4,7 @@ import HabitTable from '../../components/StudyDetailComponents/HabitTable/HabitT
 import Emojis from '../../components/StudyDetailComponents/Emoji/EmojiContainer';
 import Interaction from '../../components/StudyDetailComponents/Interaction/Interaction';
 import StudyDetail from '../../components/StudyDetailComponents/StudyDetail/StudyDetail';
+import ModalLayout from '../../components/Modal/ModalLayout';
 
 import PasswordModal from '../../components/Modal/PasswordModal/PasswordModal';
 import PasswordInput from '../../components/input/PasswordInput';
@@ -13,6 +14,10 @@ import Toast from '../../components/Toast/Toast';
 
 import styles from './StudyDetailPage.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  deleteStudy,
+  validatePassword,
+} from '../../services/StudyDetailService.js';
 
 const StudyDetailPage = () => {
   const navigate = useNavigate();
@@ -23,8 +28,13 @@ const StudyDetailPage = () => {
   const [crtPassword, setCrtPassword] = useState('');
   const [password, setPassword] = useState('');
 
+  const [toastMsg, setToastMsg] = useState('');
+  const [toastType, setToastType] = useState('');
+
   const [isOpen, setIsOpen] = useState(false);
-  const [isToast, setToast] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isCompleteOpen, setIsCompleteOpen] = useState(false);
+  const [isToast, setIsToast] = useState(false);
 
   // 수정을 눌렀는지 습관을 눌렀는지 로그를 눌렀는지 . . .
   const modalHandler = (type) => {
@@ -32,6 +42,7 @@ const StudyDetailPage = () => {
     switch (type) {
       case 'delete':
         setBtnTxt('삭제하기');
+        setLink('delete');
         break;
       case 'edit':
         setBtnTxt('수정하러 가기');
@@ -54,25 +65,65 @@ const StudyDetailPage = () => {
     }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (password !== crtPassword) {
-      // toast ui 튀어나오기
-      setToast(true);
+    const data = await validatePassword(id, password);
+    const isCorrect = data.correct;
 
-      setTimeout(() => setToast(false), 3000);
+    if (!isCorrect) {
+      // toast ui 튀어나오기
+
+      setToastMsg('비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
+      setToastType('error');
+
+      setIsToast(true);
+
+      setTimeout(() => setIsToast(false), 3000);
+      return;
+    }
+
+    if (link === 'delete') {
+      setIsOpen(false);
+      setIsDeleteOpen(true);
+      setPassword('');
       return;
     }
 
     navigate(link);
   };
 
+  const shareHandler = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+
+    setToastMsg('링크가 복사되었습니다!');
+    setToastType('success');
+
+    if (isToast) {
+      setIsToast(false);
+    }
+
+    setIsToast(true);
+
+    setTimeout(() => setIsToast(false), 3000);
+  };
+
+  const deleteHandler = async (e) => {
+    e.preventDefault();
+
+    setIsDeleteOpen(false);
+
+    const data = await deleteStudy(id);
+
+    setIsCompleteOpen(true);
+  };
+
   return (
     <div className="wrapper">
       <div className={styles.ixWrapper}>
         <Emojis />
-        <Interaction onClick={modalHandler} />
+        <Interaction onClick={modalHandler} onShare={shareHandler} />
       </div>
 
       <div className={styles.introWrapper}>
@@ -86,12 +137,15 @@ const StudyDetailPage = () => {
       <main className={styles.innerWrapper}>
         <h2 className={styles.tableTitle}>습관 기록표</h2>
 
-        <HabitTable />
+        <HabitTable id={id} />
       </main>
 
       {isOpen && (
         <PasswordModal
-          onClose={() => setIsOpen(false)}
+          onClose={() => {
+            setIsOpen(false);
+            setPassword('');
+          }}
           title={'연우의 개발공장'}
         >
           <form>
@@ -111,12 +165,48 @@ const StudyDetailPage = () => {
         </PasswordModal>
       )}
 
+      {isDeleteOpen && (
+        <ModalLayout>
+          <div className={styles.modalMsgBox}>
+            <p>정말 삭제하시겠습니까?</p>
+          </div>
+          <div className={styles.modalBtnBox}>
+            <Button
+              btnTxt={'취소'}
+              btnStyle="btnCancel"
+              btnType={'button'}
+              onClick={() => setIsDeleteOpen(false)}
+            />
+            <Button
+              btnTxt={'확인'}
+              btnStyle="btnModification"
+              btnType={'button'}
+              onClick={(e) => deleteHandler(e)}
+            />
+          </div>
+        </ModalLayout>
+      )}
+
+      {isCompleteOpen && (
+        <ModalLayout>
+          <div className={styles.modalMsgBox}>
+            <p>삭제가 완료되었습니다.</p>
+          </div>
+          <div className={styles.modalBtnBox}>
+            <Button
+              btnTxt={'홈으로'}
+              btnStyle="btnDefault"
+              btnType={'button'}
+              onClick={() => navigate('/')}
+            />
+          </div>
+        </ModalLayout>
+      )}
+
       {isToast && (
-        <Toast
-          toastType="error"
-          toastMsg="비밀번호가 일치하지 않습니다. 다시 입력해주세요."
-          toastStyle="L"
-        />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Toast toastType={toastType} toastMsg={toastMsg} />
+        </div>
       )}
     </div>
   );

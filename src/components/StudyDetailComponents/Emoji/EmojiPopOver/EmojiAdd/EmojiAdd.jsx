@@ -16,7 +16,6 @@ const EmojiAdd = ({ emojis, setEmojis, id }) => {
     // emoji 가 현재 emoji 안에 있는 지 확인
     // 있으면 patch 로 넘기고
     // 없으면 create 로 넘기자!
-
     const selectEmoji = emojis.find((emoji) => emoji.emoji === e.emoji);
 
     if (!selectEmoji) {

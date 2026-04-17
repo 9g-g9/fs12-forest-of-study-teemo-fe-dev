@@ -1,13 +1,14 @@
 import styles from './TodayFocus.module.css';
 import { useEffect, useRef, useState } from 'react';
-import FocusHeader from '../../components/FocusComponents/FocusHeader';
-import TotalPoints from '../../components/FocusComponents/TotalPoints';
+import FocusHeader from '../../components/FocusComponents/FocusHeader/FocusHeader';
+import TotalPoints from '../../components/FocusComponents/TotalPoints/TotalPoints';
 import TargetDuration from '../../components/FocusComponents/TargetDuration/TargetDuration';
-import Timer from '../../components/FocusComponents/Timer';
+import Timer from '../../components/FocusComponents/Timer/Timer';
 import { useParams } from 'react-router-dom';
 import {
   createTimer,
   getTimer,
+  updateComplete,
   updatePause,
   updateReset,
   updateStart,
@@ -33,6 +34,8 @@ const TodayFocus = () => {
   const [toastType, setToastType] = useState('');
   const [toastMsg, setToastMsg] = useState('');
 
+  const timerRef = useRef();
+
   // 타이머 토스트 메세지 함수
   const setTimerToast = (type, points = 0) => {
     setToastType(type);
@@ -44,31 +47,54 @@ const TodayFocus = () => {
     setToastShow(true);
   };
 
-  const timerRef = useRef();
+  // 타이머 초기화 함수
+  const initTimer = () => {
+    setTargetDuration(1500000);
+    setTimerCount(1500000);
+    setTimerStatus('CANCELED');
+  };
 
+  // 오늘의 집중 페이지 렌더링
   useEffect(() => {
-    const fetchTimer = async () => {
-      const data = await getTimer(id);
-      if (!data.timer) {
-        setTargetDuration(1500000);
-        setTimerCount(1500000);
-        await createTimer(id);
-        return;
-      }
+    try {
+      const fetchTimer = async () => {
+        const data = await getTimer(id);
+        setTitle(data.title);
+        if (!data.timer) {
+          initTimer();
+          await createTimer(id);
+          return;
+        }
+        const getTimerData = data.timer;
 
-      setTitle(data.title);
-      setTargetDuration(data.timer.targetDuration);
-      setTimerStatus(data.timer.status);
-      setTimerCount(data.timer.targetDuration - data.timer.elapsedTime + 700);
-    };
+        setTargetDuration(getTimerData.targetDuration);
+        setTimerStatus(getTimerData.status);
+        setTimerCount(
+          getTimerData.targetDuration - getTimerData.elapsedTime + 700,
+        );
+      };
 
-    fetchTimer();
+      fetchTimer();
+    } catch (error) {
+      console.error(error);
+    }
   }, [id]);
 
+  // 타이머 시간 출력
   useEffect(() => {
+    if (timerStatus === 'COMPLETED') {
+      timerRef.current = setInterval(() => {
+        setTimerCount((prev) => prev + 1000);
+      }, 1000);
+    }
     if (timerStatus === 'IN_PROGRESS') {
       timerRef.current = setInterval(() => {
-        setTimerCount((prev) => prev - 1000);
+        setTimerCount((prev) => {
+          if (prev - 1000 < 1000) {
+            setTimerStatus('COMPLETED');
+          }
+          return prev - 1000;
+        });
       }, 1000);
     }
 
@@ -77,6 +103,7 @@ const TodayFocus = () => {
     };
   }, [id, timerStatus]);
 
+  // 토스트 메시지 출력
   useEffect(() => {
     setTimeout(() => {
       setToastShow(false);
@@ -156,10 +183,10 @@ const TodayFocus = () => {
       Number(minutes) * 1000 * 60 +
       Number(seconds) * 1000;
 
-    if (formattedMs < 600000) {
-      setError('10분 이상으로 입력해주세요');
-      return;
-    }
+    // if (formattedMs < 600000) {
+    //   setError('10분 이상으로 입력해주세요');
+    //   return;
+    // }
 
     setTargetDuration(formattedMs);
     setTimerCount(formattedMs);
@@ -192,6 +219,14 @@ const TodayFocus = () => {
     await updateReset(id);
   };
 
+  const timerCompleteHandler = async () => {
+    const points = await updateComplete(id);
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+    initTimer();
+    setTimerToast('success', points);
+  };
+
   return (
     <>
       <div className="wrapper">
@@ -220,12 +255,14 @@ const TodayFocus = () => {
             </div>
             <Timer
               timer={timerCount}
+              toggleForm={toggleForm}
               targetDuration={targetDuration}
               setTargetDuration={setTargetDuration}
               timerStatus={timerStatus}
               onStart={timerStartHandler}
               onPause={timerPauseHandler}
               onReset={timerResetHandler}
+              onComplete={timerCompleteHandler}
             />
           </main>
         </div>
