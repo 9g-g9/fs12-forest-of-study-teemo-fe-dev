@@ -1,7 +1,7 @@
 import styles from './TotalPoint.module.css';
 import icPoint from '../../assets/icons/ic_point.svg';
 import { useEffect, useState } from 'react';
-import { getTotalPoint } from '../../services/pointService';
+import { getTotalPoint } from '../../services/PointService';
 
 /* ----------------------------------
             총합 포인트 컴포넌트
