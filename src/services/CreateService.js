@@ -1,5 +1,7 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const postStudy = async (data) => {
-  const response = await fetch('http://localhost:8080/api/studies', {
+  const response = await fetch(`${API_URL}/api/studies`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +14,7 @@ export const postStudy = async (data) => {
 };
 
 export const patchService = async (id, data) => {
-  const response = await fetch(`http://localhost:8080/api/studies/${id}`, {
+  const response = await fetch(`${API_URL}/api/studies/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +27,7 @@ export const patchService = async (id, data) => {
 };
 
 export const getStudy = async (id) => {
-  const response = await fetch(`http://localhost:8080/api/studies/${id}`);
+  const response = await fetch(`${API_URL}/api/studies/${id}`);
   const result = await response.json();
   return result;
 };
