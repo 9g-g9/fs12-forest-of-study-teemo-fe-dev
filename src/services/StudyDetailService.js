@@ -1,16 +1,14 @@
-const STUDY_API_URL = 'http://localhost:8080/api/studies';
-const EMOJI_API_URL = 'http://localhost:8080/api/emojis';
-const HABIT_API_URL = 'http://localhost:8080/api/habits';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const getStudyDetail = async (id) => {
-  const res = await fetch(`${STUDY_API_URL}/${id}`);
+  const res = await fetch(`${API_URL}/api/studies/${id}`);
   const data = await res.json();
 
   return data.data;
 };
 
 export const validatePassword = async (id, password) => {
-  const res = await fetch(`${STUDY_API_URL}/${id}/pw`, {
+  const res = await fetch(`${API_URL}/api/studies/${id}/pw`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -26,7 +24,7 @@ export const validatePassword = async (id, password) => {
 };
 
 export const deleteStudy = async (id) => {
-  const res = await fetch(`${STUDY_API_URL}/${id}`, {
+  const res = await fetch(`${API_URL}/api/studies/${id}`, {
     method: 'DELETE',
   });
   const data = res.json();
@@ -36,14 +34,14 @@ export const deleteStudy = async (id) => {
 
 // emoji
 export const getEmojis = async (id) => {
-  const res = await fetch(`${EMOJI_API_URL}/${id}`);
+  const res = await fetch(`${API_URL}/api/emojis/${id}`);
   const data = await res.json();
 
   return data.data;
 };
 
 export const createEmojis = async (id, emoji) => {
-  const res = await fetch(`${EMOJI_API_URL}/${id}`, {
+  const res = await fetch(`${API_URL}/api/emojis/${id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +57,7 @@ export const createEmojis = async (id, emoji) => {
 };
 
 export const updateEmojis = async (id, emojiId) => {
-  const res = await fetch(`${EMOJI_API_URL}/${id}/${emojiId}`, {
+  const res = await fetch(`${API_URL}/api/emojis/${id}/${emojiId}`, {
     method: 'PATCH',
   });
 
@@ -69,7 +67,7 @@ export const updateEmojis = async (id, emojiId) => {
 };
 
 export const getWeeklyHabits = async (id) => {
-  const res = await fetch(`${HABIT_API_URL}/${id}/weekly`);
+  const res = await fetch(`${API_URL}/api/habits/${id}/weekly`);
   const data = await res.json();
 
   const habits = data.data.habits;
