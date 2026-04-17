@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import HabitTable from '../../components/StudyDetailComponents/HabitTable/HabitTable';
 import Emojis from '../../components/StudyDetailComponents/Emoji/EmojiContainer';
@@ -17,6 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   deleteStudy,
   validatePassword,
+  getStudyDetail,
 } from '../../services/StudyDetailService.js';
 
 const StudyDetailPage = () => {
@@ -35,6 +36,27 @@ const StudyDetailPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isCompleteOpen, setIsCompleteOpen] = useState(false);
   const [isToast, setIsToast] = useState(false);
+  const [study, setStudy] = useState([]);
+
+  const fetchStudy = async () => {
+    try {
+      const data = await getStudyDetail(id);
+
+      if (!data) {
+        return;
+      }
+
+      setStudy(data);
+      setCrtPassword(data.password);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    fetchStudy();
+  }, []);
 
   // 수정을 눌렀는지 습관을 눌렀는지 로그를 눌렀는지 . . .
   const modalHandler = (type) => {
@@ -131,6 +153,7 @@ const StudyDetailPage = () => {
           onClick={modalHandler}
           setCrtPassword={setCrtPassword}
           id={id}
+          study={study}
         />
       </div>
 
@@ -146,7 +169,7 @@ const StudyDetailPage = () => {
             setIsOpen(false);
             setPassword('');
           }}
-          title={'연우의 개발공장'}
+          title={`${study.nickname}의 ${study.title}`}
         >
           <form>
             <p className={styles.formMessage}>권한이 필요해요!</p>
