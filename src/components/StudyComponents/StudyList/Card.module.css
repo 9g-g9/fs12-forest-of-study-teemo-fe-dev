@@ -4,6 +4,13 @@
   --card_black_opacity_50: rgba(0, 0, 0, 0.5);
 }
 
+.cardLink {
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
 .cardBackground {
   position: relative;
   display: flex;
@@ -15,6 +22,7 @@
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .solidBackground {
