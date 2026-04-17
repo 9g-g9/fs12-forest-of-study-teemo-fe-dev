@@ -1,5 +1,5 @@
 import styles from './TotalPoints.module.css';
-import TotalPoint from '../../TotalPoint/TotalPoint';
+import TotalPoint from '../../../../components/TotalPoint/TotalPoint';
 
 const TotalPoints = ({ studyId }) => {
   return (

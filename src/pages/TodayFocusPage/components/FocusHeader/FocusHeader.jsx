@@ -1,5 +1,5 @@
 import styles from './FocusHeader.module.css';
-import LinkButton from '../../LinkButton/LinkButton';
+import LinkButton from '../../../../components/LinkButton/LinkButton';
 
 const FocusHeader = ({ studyId, title }) => {
   return (
