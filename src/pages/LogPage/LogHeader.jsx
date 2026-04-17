@@ -2,7 +2,7 @@ import styles from "./LogPage.module.css";
 import LinkButton from '../../components/LinkButton/LinkButton';
 import CurrentTime from '../../components/CurrentTime/CurrentTime';
 
-const LogHeader = ({ id, logType, setLogType }) => {
+const LogHeader = ({ studyId, logType, setLogType }) => {
   return (
     <div className={styles.topwrapper}>
         {/** 스터디이름, 링크 */}
@@ -14,7 +14,7 @@ const LogHeader = ({ id, logType, setLogType }) => {
             <LinkButton  
               className={styles.linkButton}
               text="스터디" 
-              url={`/${id}/detail`}
+              url={`/${studyId}/detail`}
             />
             <LinkButton 
               className={styles.linkButton}
