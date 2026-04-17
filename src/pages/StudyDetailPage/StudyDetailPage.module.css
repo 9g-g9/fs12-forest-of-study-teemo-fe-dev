@@ -47,6 +47,24 @@
   font-weight: 600;
 }
 
+.modalMsgBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 150px;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modalBtnBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
 @media (max-width: 1024px) {
 }
 
