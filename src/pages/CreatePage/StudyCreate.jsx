@@ -6,10 +6,10 @@ import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import PasswordCheck from '../../components/CreateComponents/PasswordCheck';
 import StudyName from '../../components/CreateComponents/StudyName';
-import Introduce from '../../components/CreateComponents/Introduce/Introduce';
+import Introduce from './Introduce/Introduce';
 import Button from '../../components/Button/Button';
-import BackGround from '../../components/CreateComponents/BackGround/BackGround';
-import { createStudy } from '../../services/CreateService';
+import BackGround from './BackGround/BackGround';
+import { postStudy } from '../../services/CreateService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +23,16 @@ const StudyCreate = () => {
   const [background, setBackground] = useState('');
 
   const handleSubmit = async () => {
+    if (!nickname.trim() || !title.trim() || !background || !password.trim()) {
+      alert('필수 조건을 충족하지 못했습니다.');
+      return;
+    }
+
+    if (password !== passwordCheck) {
+      alert('비밀번호가 일치하지 않습니다');
+      return;
+    }
+
     try {
       const data = {
         nickname,
@@ -32,15 +42,18 @@ const StudyCreate = () => {
         password,
       };
 
-      const res = await createStudy(data);
+      const res = await postStudy(data);
 
-      console.log('성공:', res);
+      if (!res?.success) {
+        alert(res?.message || '스터디 생성 실패');
+        return;
+      }
+
       alert('스터디 생성 완료!');
-
-      navigate(`/${res.id}/detail`);
+      navigate(`/${res.data.id}/detail`);
     } catch (error) {
       console.error(error);
-      alert('생성 실패');
+      alert('서버 오류로 스터디 생성 실패');
     }
   };
 

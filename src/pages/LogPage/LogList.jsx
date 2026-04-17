@@ -3,12 +3,23 @@ import { formattedTime } from '../../utils/formattedTime';
 
 const LogList = ({ logType, pointLogs, focusLogs }) => {
 
-
   const logList = logType === "point" ? pointLogs : focusLogs;
   const hasData = logList && logList.length > 0;
 
-
   const dailyTotal = { point: 0, focus: 0 };
+
+  const formatKST = (isoString) => {
+    const date = new Date(isoString);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    // const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  }
 
   (pointLogs || []).forEach(log => {
     dailyTotal.point += (log.points || 0);
@@ -50,7 +61,7 @@ const LogList = ({ logType, pointLogs, focusLogs }) => {
               {logType === "point" ? (
                 <>
                   <span className={styles.rowDate}>
-                    {item.createdAt}
+                    {formatKST(item.createdAt)}
                   </span>
                   <span className={styles.rowValue}>
                     {item.points} P
@@ -59,7 +70,7 @@ const LogList = ({ logType, pointLogs, focusLogs }) => {
               ) : (
                 <>
                   <span className={styles.rowDate}>
-                    {item.createdAt}
+                    {formatKST(item.createdAt)}
                   </span>
                   <span className={styles.rowValue}>
                     {formattedTime(item.focusDuration)}
