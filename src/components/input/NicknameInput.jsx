@@ -9,8 +9,8 @@ const NicknameInput = ({ nickname, setNickname }) => {
     if (!value) {
       return '필수 입력사항입니다.';
     }
-    if (/\s/.test(value)) {
-      return '공백은 사용할 수 없습니다.';
+    if (value !== value.trim()) {
+      return '앞뒤 공백은 사용할 수 없습니다.';
     }
     if (value.length < 2) {
       return '닉네임은 2자 이상이어야 합니다.';
