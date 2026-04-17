@@ -1,37 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import LinkButton from '../../LinkButton/LinkButton';
 import Description from '../../../components/StudyDetailComponents/Description/Description';
-
-import { getStudyDetail } from '../../../services/StudyDetailService';
 
 import icArrowRight from '../../../assets/icons/ic_arrow_right.svg';
 
 import styles from './StudyDetail.module.css';
 
-const StudyDetail = ({ onClick, setCrtPassword, id }) => {
-  const [study, setStudy] = useState([]);
-
-  const fetchStudy = async () => {
-    try {
-      const data = await getStudyDetail(id);
-
-      if (!data) {
-        return;
-      }
-
-      setStudy(data);
-      setCrtPassword(data.password);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    fetchStudy();
-  }, []);
-
+const StudyDetail = ({ onClick, setCrtPassword, id, study }) => {
   return (
     <>
       <div className={styles.titleContainer}>

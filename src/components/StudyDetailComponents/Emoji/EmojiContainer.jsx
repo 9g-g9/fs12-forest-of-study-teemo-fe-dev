@@ -10,7 +10,6 @@ import EmojiMore from './EmojiPopOver/EmojiMore/EmojiMore';
 
 const EmojiContainer = () => {
   const { id } = useParams();
-  const [isMore, setIsMore] = useState(false);
   const [emojis, setEmojis] = useState([]);
 
   const fetchEmojis = async () => {
@@ -18,13 +17,6 @@ const EmojiContainer = () => {
       const data = await getEmojis(id);
 
       setEmojis(data);
-
-      if (data.length <= 3) {
-        setIsMore(false);
-        return;
-      }
-
-      setIsMore(true);
     } catch (error) {
       console.log(error);
       throw error;
@@ -46,7 +38,7 @@ const EmojiContainer = () => {
         />
       ))}
 
-      {isMore && <EmojiMore data={emojis} />}
+      {emojis.length > 3 && <EmojiMore data={emojis} />}
 
       <EmojiAdd emojis={emojis} setEmojis={setEmojis} id={id} />
     </div>
