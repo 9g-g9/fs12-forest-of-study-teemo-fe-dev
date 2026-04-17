@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navContainer {
+  display: flex;
+  gap: 16px;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .navContainer {
+    gap: 8px;
+  }
+}
