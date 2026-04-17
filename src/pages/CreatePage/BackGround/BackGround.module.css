@@ -10,7 +10,6 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 16px;
-  background: var(--gray_EEEEEE);
 }
 
 .card img {
