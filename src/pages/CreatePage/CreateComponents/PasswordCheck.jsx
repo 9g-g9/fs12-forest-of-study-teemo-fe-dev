@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styles from '../input/Input.module.css';
+import styles from '../../../components/input/Input.module.css';
 
-import closeeye from '../../assets/icons/ic_close_eye.png';
-import openeye from '../../assets/icons/ic_eye.png';
+import closeeye from '../../../assets/icons/ic_close_eye.png';
+import openeye from '../../../assets/icons/ic_eye.png';
 
 const PasswordCheck = ({ password, passwordCheck, setPasswordCheck }) => {
   const [error, setError] = useState('');
@@ -15,9 +15,6 @@ const PasswordCheck = ({ password, passwordCheck, setPasswordCheck }) => {
     }
     if (/\s/.test(value)) {
       return '공백은 사용할 수 없습니다.';
-    }
-    if (value.length < 8) {
-      return '비밀번호는 8자 이상이어야 합니다.';
     }
     if (value !== password) {
       return '비밀번호가 일치하지 않습니다';
