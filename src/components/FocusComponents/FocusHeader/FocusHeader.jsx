@@ -1,5 +1,5 @@
-import styles from '../../pages/TodayFocusPage/TodayFocus.module.css';
-import LinkButton from '../../components/LinkButton/LinkButton';
+import styles from './FocusHeader.module.css';
+import LinkButton from '../../LinkButton/LinkButton';
 
 const FocusHeader = ({ studyId, title }) => {
   return (
