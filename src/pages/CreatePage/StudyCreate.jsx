@@ -4,11 +4,13 @@ import styles from './Create.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
-import PasswordCheck from '../../components/CreateComponents/PasswordCheck';
-import StudyName from '../../components/CreateComponents/StudyName';
-import Introduce from './Introduce/Introduce';
 import Button from '../../components/Button/Button';
-import BackGround from './BackGround/BackGround';
+
+import PasswordCheck from './CreateComponents/PasswordCheck';
+import StudyName from './CreateComponents/StudyName';
+import Introduce from './CreateComponents/Introduce/Introduce';
+import BackGround from './CreateComponents/BackGround/BackGround';
+
 import { postStudy } from '../../services/CreateService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

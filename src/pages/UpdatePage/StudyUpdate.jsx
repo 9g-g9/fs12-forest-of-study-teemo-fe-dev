@@ -4,11 +4,12 @@ import styles from '../CreatePage/Create.module.css';
 
 import NicknameInput from '../../components/input/NicknameInput';
 import PasswordInput from '../../components/input/PasswordInput';
-import PasswordCheck from '../../components/CreateComponents/PasswordCheck';
-import StudyName from '../../components/CreateComponents/StudyName';
-import Introduce from '../CreatePage/Introduce/Introduce';
 import Button from '../../components/Button/Button';
-import BackGround from '../CreatePage/BackGround/BackGround';
+
+import PasswordCheck from '../CreatePage/CreateComponents/PasswordCheck';
+import StudyName from '../CreatePage/CreateComponents/StudyName';
+import Introduce from '../CreatePage/CreateComponents/Introduce/Introduce';
+import BackGround from '../CreatePage/CreateComponents/BackGround/BackGround';
 
 import { getStudy } from '../../services/CreateService';
 import { patchService } from '../../services/CreateService';
